@@ -78,12 +78,15 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s;
   will-change:opacity,transform }
 #splash.out { opacity:0; transform:scale(1.03); pointer-events:none }
-.spl-ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:72px;
-  letter-spacing:7px; text-transform:uppercase; line-height:1;
+.spl-brand { display:flex; align-items:baseline; gap:0; justify-content:center }
+.spl-ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:64px;
+  letter-spacing:6px; text-transform:uppercase; line-height:1;
   background:linear-gradient(135deg,#6366f1,#06b6d4 55%,#10b981);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent }
-.spl-fit { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:16px;
-  letter-spacing:11px; text-transform:uppercase; color:rgba(238,242,255,.5); margin-top:3px }
+.spl-fit { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:64px;
+  letter-spacing:6px; text-transform:uppercase; line-height:1;
+  color:rgba(238,242,255,.22); -webkit-text-fill-color:rgba(238,242,255,.22);
+  margin-left:14px }
 .spl-bar-wrap { margin-top:52px; width:130px; height:2px; background:rgba(255,255,255,.07); border-radius:2px; overflow:hidden }
 .spl-bar { height:100%; width:0; background:linear-gradient(90deg,#6366f1,#06b6d4,#10b981); border-radius:2px;
   animation:barF 2.6s cubic-bezier(.4,0,.2,1) .4s forwards }
@@ -138,28 +141,30 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .bni.on::after { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
   width:22px; height:2px; background:var(--ag); border-radius:0 0 4px 4px; box-shadow:0 0 12px var(--a1) }
 
-/* FAB */
-.fab { position:fixed; bottom:calc(var(--nav) + var(--safe) + 12px); right:16px;
-  width:50px; height:50px; border-radius:50%; background:var(--ag); border:none;
+/* FAB — centered above nav, only on Treinos tab */
+.fab { position:fixed; bottom:calc(var(--nav) + var(--safe) + 14px);
+  left:50%; transform:translateX(-50%);
+  width:48px; height:48px; border-radius:50%; background:var(--ag); border:none;
   display:none; align-items:center; justify-content:center; cursor:pointer; z-index:800;
-  box-shadow:0 6px 24px rgba(99,102,241,.4),0 0 0 1px rgba(255,255,255,.08);
-  animation:fabF 4.5s ease-in-out infinite; transition:transform .18s }
-.fab:active { transform:scale(.86)!important }
-.fab svg { width:20px; height:20px; stroke:#fff; stroke-width:2.2; fill:none; stroke-linecap:round }
-@keyframes fabF { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  box-shadow:0 6px 24px rgba(99,102,241,.45),0 0 0 1px rgba(255,255,255,.09);
+  animation:fabF 4.5s ease-in-out infinite; transition:opacity .2s }
+.fab:active { opacity:.7; animation:none }
+.fab svg { width:20px; height:20px; stroke:#fff; stroke-width:2.4; fill:none; stroke-linecap:round }
+@keyframes fabF { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)} }
 
 /* ─── PAGE BRAND HEADER ─── */
-.page-brand { flex-shrink:0; padding:46px 16px 10px;
+.page-brand { flex-shrink:0; padding:44px 16px 10px;
   display:flex; flex-direction:column; align-items:center; text-align:center; position:relative }
-.pb-ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:26px;
-  letter-spacing:5px; text-transform:uppercase; line-height:1;
+.pb-wordmark { display:flex; align-items:baseline; gap:10px; justify-content:center }
+.pb-ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:24px;
+  letter-spacing:4px; text-transform:uppercase; line-height:1;
   background:var(--ag); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
-.pb-fitness { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:11px;
-  letter-spacing:7px; text-transform:uppercase; color:rgba(238,242,255,.45);
-  margin-top:1px; -webkit-text-fill-color:rgba(238,242,255,.45) }
-.pb-sub { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:24px;
-  letter-spacing:1px; margin-top:4px }
-.pb-actions { position:absolute; right:16px; top:46px; display:flex; gap:8px }
+.pb-fitness { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:24px;
+  letter-spacing:4px; text-transform:uppercase;
+  color:rgba(238,242,255,.22); -webkit-text-fill-color:rgba(238,242,255,.22) }
+.pb-sub { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:20px;
+  letter-spacing:1px; margin-top:5px; color:var(--t1); -webkit-text-fill-color:var(--t1) }
+.pb-actions { position:absolute; right:16px; top:44px; display:flex; gap:8px }
 .icon-btn { width:36px; height:36px; border-radius:50%; display:flex; align-items:center;
   justify-content:center; cursor:pointer; transition:all .2s; position:relative }
 .icon-btn svg { width:18px; height:18px; fill:none; stroke:var(--t2); stroke-width:1.7;
@@ -177,115 +182,110 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 
 /* ════════════════════════════════════════
    HOME PAGE — ZERO SCROLL ARCHITECTURE
-   Uses CSS Grid to fill exactly 100dvh
 ════════════════════════════════════════ */
 #pg-home {
   padding:0;
-  display:grid;
-  grid-template-rows: auto auto 1fr auto auto auto;
+  display:flex;
+  flex-direction:column;
   padding-bottom:calc(var(--nav) + var(--safe));
   overflow:hidden;
+  height:100dvh;
 }
-.home-header { padding:44px 14px 8px; display:flex; align-items:flex-end; justify-content:space-between; flex-shrink:0 }
-.hh-brand .ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:32px;
-  letter-spacing:4px; text-transform:uppercase; line-height:1;
-  background:var(--ag); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
-.hh-brand .fitness { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:11px;
-  letter-spacing:8px; text-transform:uppercase; color:rgba(238,242,255,.48);
-  -webkit-text-fill-color:rgba(238,242,255,.48) }
-.hh-brand .greet { font-size:12px; color:var(--t2); margin-top:3px }
-.hh-right { display:flex; gap:8px; align-items:center }
 
 /* STREAK BANNER */
-.streak-banner { margin:0 14px 8px; padding:10px 14px; flex-shrink:0;
+.streak-banner { margin:0 14px 7px; padding:9px 14px; flex-shrink:0;
   display:flex; align-items:center; justify-content:space-between; border-radius:var(--r2) }
 .sb-left { display:flex; align-items:center; gap:10px }
-.sb-fire { font-size:18px }
-.sb-info {}
-.sb-count { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:800;
-  letter-spacing:.5px; line-height:1 }
-.sb-lbl { font-size:10px; color:var(--t3); font-family:'Barlow Condensed',sans-serif;
-  letter-spacing:2px; text-transform:uppercase }
-.sb-dots { display:flex; gap:5px; align-items:center }
-.sd { width:20px; height:4px; border-radius:2px; background:rgba(255,255,255,.08); transition:background .3s }
+.sb-fire { font-size:16px }
+.sb-count { font-family:'Barlow Condensed',sans-serif; font-size:19px; font-weight:800; letter-spacing:.5px; line-height:1 }
+.sb-lbl { font-size:9px; color:var(--t3); font-family:'Barlow Condensed',sans-serif; letter-spacing:2px; text-transform:uppercase }
+.sb-dots { display:flex; gap:4px; align-items:center }
+.sd { width:18px; height:3px; border-radius:2px; background:rgba(255,255,255,.08); transition:background .3s }
 .sd.done { background:var(--a4) }
-.sd.today { background:var(--ag); box-shadow:0 0 8px rgba(99,102,241,.4) }
+.sd.today { background:var(--ag); box-shadow:0 0 7px rgba(99,102,241,.4) }
 
-/* METRICS ROW */
-.metrics-row { margin:0 14px 8px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; flex-shrink:0 }
-.metric-c { padding:12px 10px; text-align:center }
-.mc-icon { margin-bottom:6px }
-.mc-icon svg { width:20px; height:20px; fill:none; stroke-width:1.6; stroke-linecap:round;
-  stroke-linejoin:round; margin:0 auto; display:block }
-.mc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:2px;
-  text-transform:uppercase; color:var(--t3); margin-bottom:4px }
-.mc-val { font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:800; line-height:1 }
-.mc-unit { font-size:10px; color:var(--t3); margin-top:1px }
-.mc-bar { margin-top:7px }
+/* STEPS CARD — prominent */
+.steps-card { margin:0 14px 7px; flex-shrink:0; display:flex; align-items:center;
+  gap:14px; padding:11px 15px }
+.sc-ico { width:36px; height:36px; border-radius:12px; display:flex; align-items:center;
+  justify-content:center; background:rgba(245,158,11,.09); border:1px solid rgba(245,158,11,.18); flex-shrink:0 }
+.sc-ico svg { width:17px; height:17px; fill:none; stroke:var(--a4); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round }
+.sc-body { flex:1; min-width:0 }
+.sc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--t3); margin-bottom:2px }
+.sc-val { font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:900; line-height:1 }
+.sc-right { text-align:right; flex-shrink:0 }
+.sc-pct { font-family:'Barlow Condensed',sans-serif; font-size:17px; font-weight:700; line-height:1; color:var(--a4) }
+.sc-goal { font-size:9px; color:var(--t3); margin-top:2px }
+.sc-pbar { width:58px; margin-top:4px }
+
+/* COMPACT METRICS — 3-col dense, no icons */
+.metrics-row { margin:0 14px 7px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; flex-shrink:0 }
+.metric-c { padding:8px 10px }
+.mc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--t3); margin-bottom:2px }
+.mc-val { font-family:'Barlow Condensed',sans-serif; font-size:19px; font-weight:800; line-height:1 }
+.mc-unit { font-size:9px; color:var(--t3); margin-top:1px }
+.mc-bar { margin-top:5px }
 
 /* BENTO ACTIVITIES */
-.activities-row { margin:0 14px 8px; flex-shrink:0 }
-.activities-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px }
-.ah-title { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:.5px }
-.ah-perm { font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:2px;
+.activities-row { margin:0 14px 7px; flex-shrink:0 }
+.activities-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px }
+.ah-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:.5px }
+.ah-perm { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:2px;
   text-transform:uppercase; color:var(--a2); cursor:pointer }
-.bento-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:7px }
-.bento-act { display:flex; flex-direction:column; align-items:center; gap:5px;
-  padding:10px 4px; border-radius:var(--r2); cursor:pointer; transition:all .2s }
+/* Activities wrapper with + button anchored at bottom */
+.activities-inner { position:relative }
+.bento-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:5px }
+.bento-act { display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:8px 2px; border-radius:var(--r2); cursor:pointer; transition:all .2s }
 .bento-act:active { transform:scale(.88) }
-.ba-ico { width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center }
-.ba-ico svg { width:18px; height:18px; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round }
-.ba-name { font-family:'Barlow Condensed',sans-serif; font-size:9px; font-weight:600;
-  letter-spacing:1px; text-transform:uppercase; color:var(--t3); text-align:center; line-height:1.1 }
+.ba-ico { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center }
+.ba-ico svg { width:16px; height:16px; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round }
+.ba-name { font-family:'Barlow Condensed',sans-serif; font-size:8px; font-weight:700;
+  letter-spacing:.5px; text-transform:uppercase; color:var(--t3); text-align:center; line-height:1.1 }
 .bento-act.active-act .ba-name { color:var(--a5) }
 
-/* QUICK ROW: Water + Next workout */
-.quick-row { margin:0 14px 8px; display:grid; grid-template-columns:1fr 1.8fr; gap:8px; flex-shrink:0 }
+/* BOTTOM ROW: Date + Next Workout + Water */
+.bottom-row { margin:0 14px; display:grid; grid-template-columns:68px 1fr 72px; gap:7px; flex-shrink:0; align-items:stretch }
 
-/* WATER WIDGET */
-.water-card { padding:12px 14px }
-.wc-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px }
-.wc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:3px;
-  text-transform:uppercase; color:var(--t3) }
-.wc-val { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:800; color:var(--a2);
-  line-height:1 }
-.wc-unit { font-size:10px; color:var(--t3); margin-top:1px }
-.water-btns { display:flex; gap:5px }
-.wb { flex:1; padding:5px 2px; border-radius:8px; border:1px solid var(--ge); background:rgba(6,182,212,.06);
-  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:1px;
-  color:var(--a2); cursor:pointer; text-align:center; transition:all .18s }
-.wb:active { background:rgba(6,182,212,.18); transform:scale(.92) }
-.wb.del { background:transparent; color:var(--t3); border-color:rgba(255,255,255,.05); font-size:14px }
-.water-bar { margin-top:8px }
+/* DATE WIDGET */
+.date-widget { padding:10px 8px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center }
+.dw-day { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--t3); margin-bottom:2px }
+.dw-num { font-family:'Barlow Condensed',sans-serif; font-size:36px; font-weight:900; line-height:1;
+  background:var(--ag); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+.dw-month { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--t3); margin-top:2px }
 
 /* NEXT WORKOUT CARD */
-.next-card { padding:12px 14px; display:flex; flex-direction:column; justify-content:space-between }
-.nc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:3px;
-  text-transform:uppercase; color:var(--t3); margin-bottom:5px }
-.nc-name { font-family:'Barlow Condensed',sans-serif; font-size:17px; font-weight:700;
-  letter-spacing:.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:2px }
-.nc-sub { font-size:10px; color:var(--t3); margin-bottom:9px }
-.btn-go { display:inline-flex; align-items:center; gap:7px; background:var(--ag); border:none;
-  border-radius:30px; padding:8px 18px; font-family:'Barlow Condensed',sans-serif;
-  font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-  color:#fff; cursor:pointer; box-shadow:0 3px 16px rgba(99,102,241,.3); transition:all .2s; align-self:flex-start }
+.next-card { padding:10px 13px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden }
+.nc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--t3); margin-bottom:3px }
+.nc-name { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700;
+  letter-spacing:.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:1px }
+.nc-sub { font-size:10px; color:var(--t3); margin-bottom:7px }
+.btn-go { display:inline-flex; align-items:center; gap:6px; background:var(--ag); border:none;
+  border-radius:30px; padding:6px 14px; font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:#fff; cursor:pointer; box-shadow:0 3px 14px rgba(99,102,241,.3); transition:all .2s; align-self:flex-start }
 .btn-go:active { transform:scale(.93) }
-.btn-go svg { width:11px; height:11px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round }
+.btn-go svg { width:10px; height:10px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round }
 
-/* STEPS QUICK VIEW (replaces pedometer card) */
-.steps-row { margin:0 14px; flex-shrink:0; display:flex; align-items:center;
-  justify-content:space-between; padding:10px 14px; border-radius:var(--r2) }
-.sr-left { display:flex; align-items:center; gap:10px }
-.sr-ico { width:34px; height:34px; border-radius:11px; display:flex; align-items:center;
-  justify-content:center; background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.15) }
-.sr-ico svg { width:16px; height:16px; fill:none; stroke:var(--a4); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round }
-.sr-inf { }
-.sr-lbl { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:2.5px;
-  text-transform:uppercase; color:var(--t3) }
-.sr-val { font-family:'Fira Code',monospace; font-size:18px; font-weight:500; color:var(--t1); line-height:1.2 }
-.sr-right { text-align:right }
-.sr-pct { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:700; line-height:1 }
-.sr-pbar { width:70px; margin-top:4px }
+/* WATER WIDGET — compact vertical */
+.water-card { padding:10px 8px; display:flex; flex-direction:column;
+  align-items:center; justify-content:space-between; text-align:center }
+.wc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--t3); margin-bottom:2px }
+.wc-val { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:900; color:var(--a2); line-height:1 }
+.wc-unit { font-size:9px; color:var(--t3); margin-bottom:5px }
+.water-btns { display:flex; flex-direction:column; gap:4px; width:100% }
+.wb { width:100%; padding:4px 2px; border-radius:7px; border:1px solid var(--ge); background:rgba(6,182,212,.06);
+  font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700;
+  color:var(--a2); cursor:pointer; text-align:center; transition:all .18s }
+.wb:active { background:rgba(6,182,212,.18); transform:scale(.94) }
+.wb.del { background:transparent; color:var(--t3); border-color:rgba(255,255,255,.05); font-size:12px }
 
 /* ─── SECTION HEADER ─── */
 .sec-h { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; margin-top:4px; padding:0 16px }
@@ -622,7 +622,36 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   transition:all .28s; z-index:3000; box-shadow:0 4px 24px rgba(0,0,0,.5); pointer-events:none }
 .toast.on { opacity:1; transform:translateX(-50%) translateY(0) }
 
-@media(min-width:480px){body{border-left:1px solid rgba(255,255,255,.04);border-right:1px solid rgba(255,255,255,.04)}}
+/* ════════════════════════════════════════
+   RESPONSIVE — Desktop / Tablet
+════════════════════════════════════════ */
+@media(min-width:480px){
+  body { border-left:1px solid rgba(255,255,255,.05); border-right:1px solid rgba(255,255,255,.05) }
+}
+@media(min-width:600px){
+  :root { --nav:76px }
+  body { max-width:440px }
+  .home-header { padding:52px 18px 10px }
+  .streak-banner,.steps-card,.metrics-row,.activities-row,.bottom-row { margin-left:18px; margin-right:18px }
+  .metrics-row { gap:9px }
+  .metric-c { padding:11px 12px }
+  .mc-val { font-size:22px }
+  .bottom-row { grid-template-columns:76px 1fr 80px }
+  .spl-ranch,.spl-fit { font-size:72px }
+  .bento-grid { gap:8px }
+  .ba-ico { width:40px; height:40px }
+  .ba-name { font-size:9px }
+}
+@media(min-width:900px){
+  body { max-width:480px; box-shadow:0 0 80px rgba(0,0,0,.6) }
+  .home-header { padding:58px 20px 12px }
+  .hh-brand .ranch,.hh-brand .fitness { font-size:32px }
+  .sc-val { font-size:28px }
+  .metrics-row { gap:10px }
+  .mc-val { font-size:24px }
+  .bento-grid { grid-template-columns:repeat(6,1fr) }
+}
+
 </style>
 </head>
 <body data-theme="default">
@@ -648,8 +677,8 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 <!-- SPLASH — no icon per request -->
 <div id="splash">
   <div class="spl-brand">
-    <div class="spl-ranch">Ranch</div>
-    <div class="spl-fit">Fitness</div>
+    <span class="spl-ranch">Ranch</span>
+    <span class="spl-fit">Fitness</span>
   </div>
   <div class="spl-bar-wrap"><div class="spl-bar"></div></div>
 </div>
@@ -678,9 +707,12 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 <div class="pg" id="pg-home">
   <!-- HEADER -->
   <div class="home-header">
+    <div class="hh-left-spacer"></div>
     <div class="hh-brand">
-      <div class="ranch">Ranch</div>
-      <div class="fitness">Fitness</div>
+      <div class="hh-brand-row">
+        <span class="ranch">Ranch</span>
+        <span class="fitness">Fitness</span>
+      </div>
       <div class="greet" id="greetTxt">Bom dia</div>
     </div>
     <div class="hh-right">
@@ -691,11 +723,11 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
     </div>
   </div>
 
-  <!-- STREAK BANNER -->
+  <!-- 1. STREAK -->
   <div class="gc streak-banner tilt" id="streakBanner">
     <div class="sb-left">
       <div class="sb-fire">🔥</div>
-      <div class="sb-info">
+      <div>
         <div class="sb-count"><span id="streakN">0</span> dias</div>
         <div class="sb-lbl">Sequência ativa</div>
       </div>
@@ -703,24 +735,35 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
     <div class="sb-dots" id="streakDots"></div>
   </div>
 
-  <!-- METRICS ROW -->
+  <!-- 2. STEPS -->
+  <div class="gc steps-card tilt">
+    <div class="sc-ico"><svg viewBox="0 0 24 24"><path d="M15 4.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0"/><path d="M9.5 8l-2 5 4 2-1.5 5"/><path d="M6 8.5l2.5-3 3 1.5"/><path d="M14 13l2.5 4.5H8"/></svg></div>
+    <div class="sc-body">
+      <div class="sc-lbl">Passos hoje</div>
+      <div class="sc-val" id="stepsV">0</div>
+    </div>
+    <div class="sc-right">
+      <div class="sc-pct" id="stepsPct">0%</div>
+      <div class="sc-goal">de <span id="stepsGoalDisp">10.000</span></div>
+      <div class="sc-pbar"><div class="pbar-wrap"><div class="pbar-fill" id="stepsBar" style="width:0%;background:linear-gradient(90deg,var(--a4),var(--a3))"></div></div></div>
+    </div>
+  </div>
+
+  <!-- 3. METRICS compact -->
   <div class="metrics-row">
     <div class="gc metric-c tilt">
-      <div class="mc-icon"><svg viewBox="0 0 24 24" style="stroke:var(--a3)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="none"/></svg></div>
       <div class="mc-lbl">Calorias</div>
       <div class="mc-val" id="calsV">0</div>
       <div class="mc-unit">kcal</div>
       <div class="mc-bar"><div class="pbar-wrap"><div class="pbar-fill" id="calBar" style="width:0%;background:linear-gradient(90deg,#f43f5e,#f59e0b)"></div></div></div>
     </div>
     <div class="gc metric-c tilt">
-      <div class="mc-icon"><svg viewBox="0 0 24 24" style="stroke:var(--a2)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="mc-lbl">Minutos</div>
       <div class="mc-val" id="minsV">0</div>
       <div class="mc-unit">ativos</div>
       <div class="mc-bar"><div class="pbar-wrap"><div class="pbar-fill" id="minBar" style="width:0%;background:linear-gradient(90deg,#06b6d4,#6366f1)"></div></div></div>
     </div>
     <div class="gc metric-c tilt">
-      <div class="mc-icon"><svg viewBox="0 0 24 24" style="stroke:var(--a1)"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
       <div class="mc-lbl">Treinos</div>
       <div class="mc-val" id="wkCountV">0</div>
       <div class="mc-unit">semana</div>
@@ -728,32 +771,21 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
     </div>
   </div>
 
-  <!-- BENTO ACTIVITIES -->
+  <!-- 4. BENTO ACTIVITIES -->
   <div class="activities-row">
     <div class="activities-header">
       <div class="ah-title">Atividades</div>
-      <div class="ah-perm" id="permStatus" onclick="requestAllPerms()">Permissões</div>
+      <div class="ah-perm" id="permStatus" onclick="requestAllPerms()">Sensores</div>
     </div>
     <div class="bento-grid" id="bentoGrid"></div>
   </div>
 
-  <!-- QUICK ROW: Water + Next Workout -->
-  <div class="quick-row">
-    <div class="gc water-card tilt">
-      <div class="wc-top">
-        <div>
-          <div class="wc-lbl">Água</div>
-          <div class="wc-val" id="waterV">0</div>
-          <div class="wc-unit">/ <span id="waterGoal">2.0</span>L</div>
-        </div>
-        <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:var(--a2);stroke-width:1.7;stroke-linecap:round"><path d="M12 2s-7 8-7 13a7 7 0 0 0 14 0c0-5-7-13-7-13z"/></svg>
-      </div>
-      <div class="water-btns">
-        <div class="wb" onclick="addWater(200)">+200</div>
-        <div class="wb" onclick="addWater(350)">+350</div>
-        <div class="wb del" onclick="addWater(-200)">−</div>
-      </div>
-      <div class="water-bar"><div class="pbar-wrap"><div class="pbar-fill" id="waterBar" style="width:0%;background:linear-gradient(90deg,#06b6d4,#6366f1)"></div></div></div>
+  <!-- 5. BOTTOM ROW: Date + Next Workout + Water -->
+  <div class="bottom-row">
+    <div class="gc date-widget tilt">
+      <div class="dw-day" id="dwDay">Hoje</div>
+      <div class="dw-num" id="dwNum">--</div>
+      <div class="dw-month" id="dwMonth">---</div>
     </div>
     <div class="gc next-card tilt">
       <span class="nc-lbl">Próximo Treino</span>
@@ -764,30 +796,24 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
         Iniciar
       </button>
     </div>
-  </div>
-
-  <!-- STEPS ROW -->
-  <div class="gc steps-row tilt" id="stepsRow">
-    <div class="sr-left">
-      <div class="sr-ico"><svg viewBox="0 0 24 24"><path d="M15 4.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0"/><path d="M9.5 8l-2 5 4 2-1.5 5"/><path d="M6 8.5l2.5-3 3 1.5"/><path d="M14 13l2.5 4.5H8"/></svg></div>
-      <div class="sr-inf">
-        <div class="sr-lbl">Passos hoje</div>
-        <div class="sr-val" id="stepsV">0</div>
+    <div class="gc water-card tilt">
+      <div class="wc-lbl">Água</div>
+      <div class="wc-val" id="waterV">0.0</div>
+      <div class="wc-unit">/ <span id="waterGoal">2.0</span>L</div>
+      <div class="water-btns">
+        <div class="wb" onclick="addWater(200)">+200</div>
+        <div class="wb" onclick="addWater(350)">+350</div>
+        <div class="wb del" onclick="addWater(-200)">−</div>
       </div>
     </div>
-    <div class="sr-right">
-      <div class="sr-pct" id="stepsPct">0%</div>
-      <div class="sr-pbar"><div class="pbar-wrap"><div class="pbar-fill" id="stepsBar" style="width:0%;background:linear-gradient(90deg,var(--a4),var(--a3))"></div></div></div>
-    </div>
   </div>
-  <!-- small padding at bottom -->
-  <div style="height:6px;flex-shrink:0"></div>
+  <div style="height:5px;flex-shrink:0"></div>
 </div>
 
 <!-- ══════════════ PAGE 1: TREINOS ══════════════ -->
 <div class="pg" id="pg-treinos" style="overflow-y:auto;padding-bottom:calc(var(--nav)+var(--safe))">
   <div class="page-brand">
-    <div class="pb-ranch">Ranch</div><div class="pb-fitness">Fitness</div>
+    <div class="pb-wordmark"><span class="pb-ranch">Ranch</span><span class="pb-fitness">Fitness</span></div>
     <div class="pb-sub">Treinos</div>
   </div>
   <div style="padding:0 16px"><div id="wkList"></div></div>
@@ -797,7 +823,7 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 <!-- ══════════════ PAGE 2: PROFILE ══════════════ -->
 <div class="pg" id="pg-profile" style="overflow-y:auto;padding-bottom:calc(var(--nav)+var(--safe))">
   <div class="page-brand">
-    <div class="pb-ranch">Ranch</div><div class="pb-fitness">Fitness</div>
+    <div class="pb-wordmark"><span class="pb-ranch">Ranch</span><span class="pb-fitness">Fitness</span></div>
     <div class="pb-sub">Perfil</div>
     <div class="pb-actions">
       <div class="gc icon-btn tilt" onclick="openModal('mSettings')">
@@ -815,14 +841,14 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
     <div class="p-name" id="pName">Atleta Ranch</div>
     <div class="p-sub" id="pSub">Nível Intermediário · Meta: Hipertrofia</div>
   </div>
-  <div class="stats-row">
+  <div class="stats-row" style="display:none">
     <div class="gc stat-c tilt"><div class="stat-v" id="stTreinos">0</div><div class="stat-l">Atividades</div></div>
     <div class="gc stat-c tilt"><div class="stat-v" id="stMins">0</div><div class="stat-l">Minutos</div></div>
     <div class="gc stat-c tilt"><div class="stat-v" id="stStreak">0</div><div class="stat-l">Sequência</div></div>
   </div>
-  <div class="sec-h"><div class="sec-title">Conquistas</div></div>
-  <div class="ach-grid" id="achGrid"></div>
-  <div class="sec-h" style="margin-top:2px"><div class="sec-title">Histórico</div><div class="sec-act" onclick="openModal('mHistFull')">Ver tudo</div></div>
+  <!-- Conquistas hidden per spec -->
+  <div id="achGrid" style="display:none"></div>
+  <div class="sec-h"><div class="sec-title">Histórico</div><div class="sec-act" onclick="openModal('mHistFull')">Ver tudo</div></div>
   <div style="padding:0 16px"><div id="histLast"></div></div>
   <div class="sec-h" style="margin-top:8px"><div class="sec-title">Dispositivos</div><div class="sec-act" onclick="scanBLE()">Buscar</div></div>
   <div style="padding:0 16px"><div id="bleDevList"></div></div>
@@ -1098,7 +1124,7 @@ window.addEventListener('load',()=>{
   setTimeout(()=>{ document.getElementById('splash').classList.add('out'); init(); },2800);
 });
 function init(){
-  checkDailyReset(); setDate();
+  checkDailyReset(); setDate(); updateDateWidget();
   buildFtabs(); buildExGrid('Peito'); renderPresets();
   renderWks(); updateNext(); updateStats(); renderHistLast(); renderAch();
   loadProf(); loadSettingsUI(); applyBg(); checkNots();
@@ -1325,6 +1351,8 @@ function toggleActivity(){
 function startAct(){
   actRunning=true; document.getElementById('actGoBtn').textContent='Pausar';
   clearInterval(actInt);
+  // Start pedometer for step-counting activities
+  if(['walk','run','hike'].includes(actType.id)&&Perms.isGranted('motion')) startPedo();
   const base={'walk':5,'run':10,'swim':2.5,'bike':22,'yoga':0,'hike':4};
   actInt=setInterval(()=>{
     actSec++;
@@ -1350,7 +1378,7 @@ function startAct(){
   }
 }
 function pauseAct(){ actRunning=false; clearInterval(actInt); document.getElementById('actGoBtn').textContent='Retomar'; }
-function stopActivity(){ clearInterval(actInt); actRunning=false; if(actWatchId){try{navigator.geolocation.clearWatch(actWatchId);}catch{}} }
+function stopActivity(){ clearInterval(actInt); actRunning=false; stopPedo(); if(actWatchId){try{navigator.geolocation.clearWatch(actWatchId);}catch{}} }
 function finishActivity(){
   haptic('success');
   stopActivity();
@@ -1474,20 +1502,90 @@ function checkAch(){ ACHS.forEach(a=>{ if(a.check()&&!S.str('rf7_a_'+a.n)){ S.se
 function renderAch(){ document.getElementById('achGrid').innerHTML=ACHS.map(a=>{ const got=a.check()||S.str('rf7_a_'+a.n); return`<div class="gc ach-c tilt${got?'':' locked'}"><div class="ach-ic">${a.ico}</div><div class="ach-n">${a.n}</div><div class="ach-d">${a.d}</div><span class="ach-badge ${got?'got-b':'lock-b'}">${got?'Obtida':'Bloqueada'}</span></div>`; }).join(''); }
 
 /* PROFILE */
-function loadProf(){ document.getElementById('pName').textContent=prof.name||'Atleta Ranch'; document.getElementById('pSub').textContent=`Nível ${prof.level||'Intermediário'} · Meta: ${prof.goal||'Hipertrofia'}`; document.getElementById('pNameI').value=prof.name||''; document.getElementById('pLvlI').value=prof.level||'Intermediário'; document.getElementById('pGoalI').value=prof.goal||'Hipertrofia'; }
-function saveProfEdit(){ haptic('medium'); prof.name=document.getElementById('pNameI').value.trim()||'Atleta Ranch'; prof.level=document.getElementById('pLvlI').value; prof.goal=document.getElementById('pGoalI').value; S.set('rf7_prof',prof); loadProf(); closeModal('mProfEdit'); showToast('Perfil salvo'); }
-function handleAv(e){ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{ S.setStr('rf7_av',ev.target.result); document.getElementById('avInner').innerHTML=`<img src="${ev.target.result}">`; showToast('Foto salva!'); }; r.readAsDataURL(f); }
-function restoreAvatar(){ const av=S.str('rf7_av','')||S.str('rf6_av',''); if(av) document.getElementById('avInner').innerHTML=`<img src="${av}">`; }
+function loadProf(){
+  document.getElementById('pName').textContent=prof.name||'Atleta Ranch';
+  document.getElementById('pSub').textContent=`Nível ${prof.level||'Intermediário'} · Meta: ${prof.goal||'Hipertrofia'}`;
+  document.getElementById('pNameI').value=prof.name||'';
+  document.getElementById('pLvlI').value=prof.level||'Intermediário';
+  document.getElementById('pGoalI').value=prof.goal||'Hipertrofia';
+}
+function saveProfEdit(){
+  haptic('medium');
+  prof.name=document.getElementById('pNameI').value.trim()||'Atleta Ranch';
+  prof.level=document.getElementById('pLvlI').value;
+  prof.goal=document.getElementById('pGoalI').value;
+  S.set('rf7_prof',prof);
+  loadProf(); closeModal('mProfEdit'); showToast('Perfil salvo');
+}
+function handleAv(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const data=ev.target.result;
+    // Store under consistent key — write synchronously
+    try{ localStorage.setItem('rf7_avatar',data); }catch(err){ showToast('Sem espaço para salvar foto'); return; }
+    applyAvatar(data);
+    showToast('Foto de perfil salva!');
+  };
+  r.readAsDataURL(f);
+}
+function applyAvatar(data){
+  if(!data) return;
+  const el=document.getElementById('avInner');
+  if(el) el.innerHTML=`<img src="${data}" style="width:100%;height:100%;object-fit:cover">`;
+}
+function restoreAvatar(){
+  // Try new key first, then legacy keys from previous versions
+  const av=localStorage.getItem('rf7_avatar')||localStorage.getItem('rf7_av')||localStorage.getItem('rf6_av')||'';
+  if(av){
+    // Migrate to canonical key if found in legacy
+    if(!localStorage.getItem('rf7_avatar')){ try{ localStorage.setItem('rf7_avatar',av); }catch{} }
+    applyAvatar(av);
+  }
+}
 
-/* PEDOMETER */
-function initPedo(){ if(pedoOn) return; pedoOn=true; window.addEventListener('devicemotion',onMotion,{passive:true}); updatePedoBtn(); }
+function updateDateWidget(){
+  const n=new Date();
+  const daysShort=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const monthsShort=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+  const dw=document.getElementById('dwDay'),dn=document.getElementById('dwNum'),dm=document.getElementById('dwMonth');
+  if(dw) dw.textContent=daysShort[n.getDay()];
+  if(dn) dn.textContent=n.getDate();
+  if(dm) dm.textContent=monthsShort[n.getMonth()];
+  document.getElementById('stepsGoalDisp')&&(document.getElementById('stepsGoalDisp').textContent=goals.steps.toLocaleString('pt-BR'));
+}
+
+/* PEDOMETER — only active when an activity is running */
+function initPedo(){ /* listener attached only when activity starts */ }
+function startPedo(){
+  if(pedoOn) return; pedoOn=true;
+  window.addEventListener('devicemotion',onMotion,{passive:true});
+}
+function stopPedo(){
+  if(!pedoOn) return; pedoOn=false;
+  window.removeEventListener('devicemotion',onMotion);
+}
 function onMotion(e){
+  if(!actRunning) return; // guard — only count when activity is active
   const a=e.accelerationIncludingGravity||e.acceleration; if(!a) return;
   const mag=Math.sqrt((a.x||0)**2+(a.y||0)**2+(a.z||0)**2),now=Date.now();
-  if(lastAcc!==null){ const delta=Math.abs(mag-lastAcc); if(delta>stepThresh&&now-lastStepT>stepCooldown){ lastStepT=now; daily.steps=(daily.steps||0)+1; saveDaily(); document.getElementById('stepsV').textContent=daily.steps.toLocaleString('pt-BR'); const p=Math.min(Math.round(daily.steps/goals.steps*100),100); document.getElementById('stepsPct').textContent=p+'%'; document.getElementById('stepsBar').style.width=p+'%'; } } lastAcc=mag;
+  if(lastAcc!==null){
+    const delta=Math.abs(mag-lastAcc);
+    if(delta>stepThresh&&now-lastStepT>stepCooldown){
+      lastStepT=now;
+      daily.steps=(daily.steps||0)+1;
+      actStepsM++;
+      saveDaily();
+      const el=document.getElementById('stepsV'); if(el) el.textContent=daily.steps.toLocaleString('pt-BR');
+      const el2=document.getElementById('actStepsM'); if(el2) el2.textContent=actStepsM;
+      const p=Math.min(Math.round(daily.steps/goals.steps*100),100);
+      const ep=document.getElementById('stepsPct'); if(ep) ep.textContent=p+'%';
+      const eb=document.getElementById('stepsBar'); if(eb) eb.style.width=p+'%';
+    }
+  }
+  lastAcc=mag;
 }
-function updatePedoBtn(){ /* steps row is display-only now, no button needed */ }
-function togglePedo(){ if(pedoOn){window.removeEventListener('devicemotion',onMotion);pedoOn=false;showToast('Pedômetro pausado');}else{requestAllPerms();} }
+function updatePedoBtn(){}
 
 /* BLE */
 let bleConnected=false;
