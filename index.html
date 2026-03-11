@@ -6,8 +6,14 @@
 <meta name="theme-color" content="#070810">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Ranch Fitness</title>
+<meta name="apple-mobile-web-app-title" content="Ranch Fitness">
+<meta name="application-name" content="Ranch Fitness">
+<meta name="description" content="Seu companheiro de treino inteligente — track workouts, metas e comunidade.">
+<!-- Apple touch icons — generated inline via canvas on init -->
+<link rel="apple-touch-icon" id="atiLink" href="#">
+<link rel="apple-touch-icon" sizes="180x180" id="atiLink180" href="#">
 <link rel="manifest" href="#" id="manifestLink">
+<title>Ranch Fitness</title>
 
 <!-- ═══════════════════════════════════════
      CRITICAL CSS — applied before any JS
@@ -152,8 +158,8 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .fab svg { width:20px; height:20px; stroke:#fff; stroke-width:2.4; fill:none; stroke-linecap:round }
 @keyframes fabF { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)} }
 
-/* ─── PAGE BRAND HEADER ─── */
-.page-brand { flex-shrink:0; padding:44px 16px 10px;
+/* ─── PAGE BRAND HEADER — same on all tabs ─── */
+.page-brand { flex-shrink:0; padding:44px 16px 12px;
   display:flex; flex-direction:column; align-items:center; text-align:center; position:relative }
 .pb-wordmark { display:flex; align-items:baseline; gap:10px; justify-content:center }
 .pb-ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:24px;
@@ -161,7 +167,7 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   background:var(--ag); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
 .pb-fitness { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:24px;
   letter-spacing:4px; text-transform:uppercase;
-  color:rgba(238,242,255,.22); -webkit-text-fill-color:rgba(238,242,255,.22) }
+  color:rgba(238,242,255,.25); -webkit-text-fill-color:rgba(238,242,255,.25) }
 .pb-sub { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:20px;
   letter-spacing:1px; margin-top:5px; color:var(--t1); -webkit-text-fill-color:var(--t1) }
 .pb-actions { position:absolute; right:16px; top:44px; display:flex; gap:8px }
@@ -192,6 +198,27 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   height:100dvh;
 }
 
+/* HOME HEADER — title truly centered, notif button absolute */
+.home-header {
+  padding: 44px 14px 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hh-brand { display:flex; flex-direction:column; align-items:center; text-align:center }
+.hh-brand-row { display:flex; align-items:baseline; gap:10px; justify-content:center }
+.hh-brand .ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:28px;
+  letter-spacing:4px; text-transform:uppercase; line-height:1;
+  background:var(--ag); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+.hh-brand .fitness { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:28px;
+  letter-spacing:4px; text-transform:uppercase; line-height:1;
+  color:rgba(238,242,255,.25); -webkit-text-fill-color:rgba(238,242,255,.25) }
+.hh-brand .greet { font-size:11px; color:var(--t3); margin-top:3px; letter-spacing:.5px }
+.hh-left-spacer { display:none }
+.hh-right { position:absolute; right:14px; top:44px; display:flex; gap:8px; align-items:center }
+
 /* STREAK BANNER */
 .streak-banner { margin:0 14px 7px; padding:9px 14px; flex-shrink:0;
   display:flex; align-items:center; justify-content:space-between; border-radius:var(--r2) }
@@ -204,9 +231,18 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .sd.done { background:var(--a4) }
 .sd.today { background:var(--ag); box-shadow:0 0 7px rgba(99,102,241,.4) }
 
-/* STEPS CARD — prominent */
-.steps-card { margin:0 14px 7px; flex-shrink:0; display:flex; align-items:center;
-  gap:14px; padding:11px 15px }
+/* STEPS + WATER — side by side row */
+.steps-water-row {
+  margin: 0 14px 7px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 7px;
+  flex-shrink: 0;
+  align-items: stretch;
+}
+
+/* STEPS CARD — left column, prominent */
+.steps-card { flex-shrink:0; display:flex; align-items:center; gap:12px; padding:11px 14px }
 .sc-ico { width:36px; height:36px; border-radius:12px; display:flex; align-items:center;
   justify-content:center; background:rgba(245,158,11,.09); border:1px solid rgba(245,158,11,.18); flex-shrink:0 }
 .sc-ico svg { width:17px; height:17px; fill:none; stroke:var(--a4); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round }
@@ -219,16 +255,53 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .sc-goal { font-size:9px; color:var(--t3); margin-top:2px }
 .sc-pbar { width:58px; margin-top:4px }
 
-/* COMPACT METRICS — 3-col dense, no icons */
+/* METRICS + WATER BENTO GRID */
+.metrics-water-grid {
+  margin: 0 14px 7px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.45fr;
+  gap: 6px;
+  flex-shrink: 0;
+}
+/* keep metrics-row alias in case JS references it */
 .metrics-row { margin:0 14px 7px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; flex-shrink:0 }
-.metric-c { padding:8px 10px }
+.mw-metrics { display:contents } /* transparent wrapper */
+.metric-c { padding:9px 10px; text-align:center }
+.mc-icon { margin-bottom:5px }
+.mc-icon svg { width:18px; height:18px; fill:none; stroke-width:1.6; stroke-linecap:round;
+  stroke-linejoin:round; margin:0 auto; display:block }
 .mc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:2px;
   text-transform:uppercase; color:var(--t3); margin-bottom:2px }
 .mc-val { font-family:'Barlow Condensed',sans-serif; font-size:19px; font-weight:800; line-height:1 }
 .mc-unit { font-size:9px; color:var(--t3); margin-top:1px }
 .mc-bar { margin-top:5px }
 
-/* BENTO ACTIVITIES */
+/* WATER CARD — right column beside steps, wider for tap targets */
+.water-card {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  width: 138px;
+  flex-shrink: 0;
+}
+.wc-head { display:flex; align-items:center; gap:5px }
+.wc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--t3) }
+.wc-display { display:flex; align-items:baseline; gap:4px }
+.wc-val { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:900;
+  color:var(--a2); line-height:1 }
+.wc-unit { font-size:9px; color:var(--t3) }
+.water-bar-wrap { /* visible progress bar */ }
+.water-btns-row { display:flex; flex-direction:column; gap:4px }
+.wb { padding:7px 4px; border-radius:8px; border:1px solid var(--ge);
+  background:rgba(6,182,212,.07); font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:700; color:var(--a2); cursor:pointer; text-align:center;
+  transition:all .18s; white-space:nowrap; width:100%; min-height:32px;
+  display:flex; align-items:center; justify-content:center }
+.wb:active { background:rgba(6,182,212,.22); transform:scale(.94) }
+.wb.del { background:transparent; color:var(--t3); border-color:rgba(255,255,255,.06); font-size:15px }
 .activities-row { margin:0 14px 7px; flex-shrink:0 }
 .activities-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px }
 .ah-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:.5px }
@@ -246,8 +319,8 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   letter-spacing:.5px; text-transform:uppercase; color:var(--t3); text-align:center; line-height:1.1 }
 .bento-act.active-act .ba-name { color:var(--a5) }
 
-/* BOTTOM ROW: Date + Next Workout + Water */
-.bottom-row { margin:0 14px; display:grid; grid-template-columns:68px 1fr 72px; gap:7px; flex-shrink:0; align-items:stretch }
+/* BOTTOM ROW: Date + Next Workout (water moved to metrics grid) */
+.bottom-row { margin:0 14px 7px; display:grid; grid-template-columns:68px 1fr; gap:7px; flex-shrink:0; align-items:stretch }
 
 /* DATE WIDGET */
 .date-widget { padding:10px 8px; display:flex; flex-direction:column;
@@ -272,20 +345,6 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   color:#fff; cursor:pointer; box-shadow:0 3px 14px rgba(99,102,241,.3); transition:all .2s; align-self:flex-start }
 .btn-go:active { transform:scale(.93) }
 .btn-go svg { width:10px; height:10px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round }
-
-/* WATER WIDGET — compact vertical */
-.water-card { padding:10px 8px; display:flex; flex-direction:column;
-  align-items:center; justify-content:space-between; text-align:center }
-.wc-lbl { font-family:'Barlow Condensed',sans-serif; font-size:8px; letter-spacing:2px;
-  text-transform:uppercase; color:var(--t3); margin-bottom:2px }
-.wc-val { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:900; color:var(--a2); line-height:1 }
-.wc-unit { font-size:9px; color:var(--t3); margin-bottom:5px }
-.water-btns { display:flex; flex-direction:column; gap:4px; width:100% }
-.wb { width:100%; padding:4px 2px; border-radius:7px; border:1px solid var(--ge); background:rgba(6,182,212,.06);
-  font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700;
-  color:var(--a2); cursor:pointer; text-align:center; transition:all .18s }
-.wb:active { background:rgba(6,182,212,.18); transform:scale(.94) }
-.wb.del { background:transparent; color:var(--t3); border-color:rgba(255,255,255,.05); font-size:12px }
 
 /* ─── SECTION HEADER ─── */
 .sec-h { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; margin-top:4px; padding:0 16px }
@@ -623,7 +682,151 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .toast.on { opacity:1; transform:translateX(-50%) translateY(0) }
 
 /* ════════════════════════════════════════
-   RESPONSIVE — Desktop / Tablet
+   RESPONSIVE UPDATES
+════════════════════════════════════════ */
+.share-canvas-wrap { position:relative; border-radius:var(--r2); overflow:hidden;
+  background:#070810; margin-bottom:12px; aspect-ratio:4/5; display:flex;
+  align-items:stretch; justify-content:stretch }
+#shareCanvas { width:100%; height:100%; display:block; border-radius:var(--r2) }
+.share-photo-btn { position:absolute; top:10px; right:10px; width:38px; height:38px;
+  border-radius:50%; background:rgba(0,0,0,.6); border:1.5px solid rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s }
+.share-photo-btn svg { width:18px; height:18px; fill:none; stroke:#fff; stroke-width:1.7;
+  stroke-linecap:round; stroke-linejoin:round }
+.share-photo-btn:active { transform:scale(.88) }
+.share-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:10px }
+.share-btn { padding:11px 8px; border-radius:var(--r2); border:1px solid var(--ge);
+  background:var(--g0); font-family:'Barlow Condensed',sans-serif; font-size:13px;
+  font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--t1);
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+  transition:all .2s; backdrop-filter:var(--blur) }
+.share-btn:active { transform:scale(.95); background:var(--g1) }
+.share-btn svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7;
+  stroke-linecap:round; stroke-linejoin:round; flex-shrink:0 }
+.share-btn.primary { background:var(--ag); border-color:transparent; grid-column:1/-1;
+  box-shadow:0 4px 18px rgba(99,102,241,.35) }
+.share-btn.primary svg { stroke:#fff }
+
+/* ════════════════════════════════════════
+   SOCIAL PAGE (PAGE 3)
+════════════════════════════════════════ */
+#pg-social { overflow-y:auto; padding-bottom:calc(var(--nav)+var(--safe)) }
+.social-search-wrap { padding:0 14px 10px; position:relative }
+.social-search { width:100%; padding:10px 14px 10px 40px; border-radius:var(--r2);
+  background:var(--g0); border:1px solid var(--ge); color:var(--t1);
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; outline:none;
+  backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur) }
+.social-search::placeholder { color:var(--t4) }
+.social-search-ico { position:absolute; left:26px; top:50%; transform:translateY(-50%);
+  width:16px; height:16px; fill:none; stroke:var(--t3); stroke-width:1.7;
+  stroke-linecap:round; pointer-events:none }
+.social-tabs { display:flex; gap:6px; padding:0 14px 10px; flex-shrink:0 }
+.stab { padding:6px 14px; border-radius:20px; font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:700;
+  color:var(--t3); border:1px solid var(--ge); cursor:pointer; transition:all .2s }
+.stab.on { background:var(--ag); border-color:transparent; color:#fff;
+  box-shadow:0 2px 12px rgba(99,102,241,.3) }
+.stab:active { transform:scale(.94) }
+.athlete-card { margin:0 14px 9px; padding:14px; display:flex; align-items:center; gap:12px;
+  cursor:pointer; transition:all .22s }
+.athlete-card:active { transform:scale(.98) }
+.ath-av { width:46px; height:46px; border-radius:50%; flex-shrink:0;
+  background:var(--g1); border:2px solid var(--ge2); display:flex; align-items:center;
+  justify-content:center; overflow:hidden; font-family:'Barlow Condensed',sans-serif;
+  font-size:18px; font-weight:900; color:var(--a2) }
+.ath-av img { width:100%; height:100%; object-fit:cover }
+.ath-info { flex:1; min-width:0 }
+.ath-name { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:800;
+  letter-spacing:.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.ath-meta { font-size:10px; color:var(--t3); margin-top:2px }
+.ath-badge { font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:1.5px;
+  text-transform:uppercase; padding:3px 8px; border-radius:20px; flex-shrink:0 }
+.ath-badge.fire { background:rgba(245,158,11,.12); color:var(--a4); border:1px solid rgba(245,158,11,.2) }
+.ath-badge.elite { background:rgba(99,102,241,.12); color:var(--a1); border:1px solid rgba(99,102,241,.2) }
+.ath-badge.new { background:rgba(16,185,129,.12); color:var(--a5); border:1px solid rgba(16,185,129,.2) }
+.ath-stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin:0 14px 12px }
+.ath-stat { padding:9px; text-align:center; border-radius:var(--r2) }
+.as-val { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:900; line-height:1 }
+.as-lbl { font-family:'Barlow Condensed',sans-serif; font-size:7px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--t3); margin-top:2px }
+.ranking-row { display:flex; align-items:center; gap:10px; padding:10px 14px;
+  margin:0 14px 6px; border-radius:var(--r2); cursor:pointer; transition:all .2s }
+.ranking-row:active { transform:scale(.97) }
+.rank-pos { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:900;
+  width:32px; text-align:center; flex-shrink:0; line-height:1 }
+.rank-pos.gold { background:linear-gradient(135deg,#f59e0b,#f43f5e);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+.rank-pos.silver { color:rgba(238,242,255,.5); -webkit-text-fill-color:rgba(238,242,255,.5) }
+.rank-pos.bronze { color:#a16207; -webkit-text-fill-color:#a16207 }
+.rank-info { flex:1; min-width:0 }
+.rank-name { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700 }
+.rank-sub { font-size:10px; color:var(--t3); margin-top:1px }
+.rank-score { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:800;
+  color:var(--a2); flex-shrink:0 }
+.social-section { padding:0 14px 8px; font-family:'Barlow Condensed',sans-serif;
+  font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--t3) }
+.follow-btn { padding:5px 14px; border-radius:20px; border:1px solid var(--ge);
+  background:transparent; font-family:'Barlow Condensed',sans-serif; font-size:10px;
+  letter-spacing:1.5px; text-transform:uppercase; font-weight:700; color:var(--a2);
+  cursor:pointer; transition:all .2s; flex-shrink:0 }
+.follow-btn.following { background:rgba(99,102,241,.12); border-color:rgba(99,102,241,.3); color:var(--a1) }
+.follow-btn:active { transform:scale(.92) }
+
+/* ════════════════════════════════════════
+   NEWS / WELLNESS CARD — Home bottom
+════════════════════════════════════════ */
+.news-section { margin:0 14px 7px; flex-shrink:0 }
+.news-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:7px }
+.news-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:.5px }
+.news-dot { width:6px; height:6px; border-radius:50%; background:var(--ag); animation:pulse 2s infinite }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+.news-card {
+  position:relative; border-radius:var(--r1); overflow:hidden;
+  min-height:100px; cursor:pointer; transition:transform .2s;
+  border:1px solid var(--ge2);
+  background:var(--g0);
+  backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+}
+.news-card:active { transform:scale(.98) }
+/* Emoji background layer */
+.news-emoji-bg {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:72px; opacity:.13; pointer-events:none; user-select:none;
+  filter:blur(2px);
+}
+/* Gradient overlay */
+.news-gradient-overlay {
+  position:absolute; inset:0;
+  pointer-events:none;
+}
+/* Content */
+.news-content { position:relative; z-index:1; padding:14px 15px 12px }
+.news-pill {
+  display:inline-flex; align-items:center; gap:5px; padding:3px 9px;
+  border-radius:20px; font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
+  margin-bottom:8px;
+}
+.news-headline {
+  font-family:'Barlow Condensed',sans-serif; font-size:17px; font-weight:800;
+  line-height:1.25; letter-spacing:.3px; color:var(--t1); margin-bottom:6px;
+}
+.news-body {
+  font-size:11px; color:var(--t2); line-height:1.5; margin-bottom:10px;
+}
+.news-footer { display:flex; align-items:center; justify-content:space-between }
+.news-source { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--t3) }
+.news-read { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--a2); display:flex; align-items:center; gap:4px }
+.news-read svg { width:10px; height:10px; fill:none; stroke:var(--a2); stroke-width:2; stroke-linecap:round }
+/* Dots indicator */
+.news-dots { display:flex; justify-content:center; gap:5px; margin-top:7px }
+.ndot { width:5px; height:5px; border-radius:50%; background:var(--t4); transition:all .3s }
+.ndot.on { width:14px; background:var(--ag); border-radius:3px }
+
+/* ════════════════════════════════════════
+   RESPONSIVE UPDATES
 ════════════════════════════════════════ */
 @media(min-width:480px){
   body { border-left:1px solid rgba(255,255,255,.05); border-right:1px solid rgba(255,255,255,.05) }
@@ -632,26 +835,20 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   :root { --nav:76px }
   body { max-width:440px }
   .home-header { padding:52px 18px 10px }
-  .streak-banner,.steps-card,.metrics-row,.activities-row,.bottom-row { margin-left:18px; margin-right:18px }
-  .metrics-row { gap:9px }
-  .metric-c { padding:11px 12px }
-  .mc-val { font-size:22px }
-  .bottom-row { grid-template-columns:76px 1fr 80px }
+  .streak-banner,.steps-water-row,.metrics-row,.activities-row,.bottom-row,.news-section { margin-left:18px; margin-right:18px }
+  .metrics-row { gap:8px }
+  .metric-c { padding:10px 12px }
+  .mc-val { font-size:20px }
   .spl-ranch,.spl-fit { font-size:72px }
   .bento-grid { gap:8px }
-  .ba-ico { width:40px; height:40px }
-  .ba-name { font-size:9px }
+  .water-card { width:148px }
 }
 @media(min-width:900px){
   body { max-width:480px; box-shadow:0 0 80px rgba(0,0,0,.6) }
   .home-header { padding:58px 20px 12px }
   .hh-brand .ranch,.hh-brand .fitness { font-size:32px }
-  .sc-val { font-size:28px }
-  .metrics-row { gap:10px }
-  .mc-val { font-size:24px }
-  .bento-grid { grid-template-columns:repeat(6,1fr) }
+  .mc-val { font-size:22px }
 }
-
 </style>
 </head>
 <body data-theme="default">
@@ -704,10 +901,9 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 <div class="pages-wrap" id="pagesWrap">
 
 <!-- ══════════════ PAGE 0: HOME ══════════════ -->
-<div class="pg" id="pg-home">
+<div class="pg" id="pg-home" style="overflow-y:auto;padding-bottom:calc(var(--nav) + var(--safe) + 8px)">
   <!-- HEADER -->
   <div class="home-header">
-    <div class="hh-left-spacer"></div>
     <div class="hh-brand">
       <div class="hh-brand-row">
         <span class="ranch">Ranch</span>
@@ -735,35 +931,56 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
     <div class="sb-dots" id="streakDots"></div>
   </div>
 
-  <!-- 2. STEPS -->
-  <div class="gc steps-card tilt">
-    <div class="sc-ico"><svg viewBox="0 0 24 24"><path d="M15 4.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0"/><path d="M9.5 8l-2 5 4 2-1.5 5"/><path d="M6 8.5l2.5-3 3 1.5"/><path d="M14 13l2.5 4.5H8"/></svg></div>
-    <div class="sc-body">
-      <div class="sc-lbl">Passos hoje</div>
-      <div class="sc-val" id="stepsV">0</div>
+  <!-- 2. STEPS + ÁGUA lado a lado -->
+  <div class="steps-water-row">
+    <div class="gc steps-card tilt">
+      <div class="sc-ico"><svg viewBox="0 0 24 24"><path d="M15 4.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0"/><path d="M9.5 8l-2 5 4 2-1.5 5"/><path d="M6 8.5l2.5-3 3 1.5"/><path d="M14 13l2.5 4.5H8"/></svg></div>
+      <div class="sc-body">
+        <div class="sc-lbl">Passos hoje</div>
+        <div class="sc-val" id="stepsV">0</div>
+      </div>
+      <div class="sc-right">
+        <div class="sc-pct" id="stepsPct">0%</div>
+        <div class="sc-goal">de <span id="stepsGoalDisp">10.000</span></div>
+        <div class="sc-pbar"><div class="pbar-wrap"><div class="pbar-fill" id="stepsBar" style="width:0%;background:linear-gradient(90deg,var(--a4),var(--a3))"></div></div></div>
+      </div>
     </div>
-    <div class="sc-right">
-      <div class="sc-pct" id="stepsPct">0%</div>
-      <div class="sc-goal">de <span id="stepsGoalDisp">10.000</span></div>
-      <div class="sc-pbar"><div class="pbar-wrap"><div class="pbar-fill" id="stepsBar" style="width:0%;background:linear-gradient(90deg,var(--a4),var(--a3))"></div></div></div>
+    <div class="gc water-card tilt">
+      <div class="wc-head">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--a2);stroke-width:2;stroke-linecap:round;flex-shrink:0"><path d="M12 2s-7 8-7 13a7 7 0 0 0 14 0c0-5-7-13-7-13z"/></svg>
+        <div class="wc-lbl">Hidratação</div>
+      </div>
+      <div class="wc-display">
+        <div class="wc-val" id="waterV">0.0</div>
+        <div class="wc-unit">/ <span id="waterGoal">2.0</span>L</div>
+      </div>
+      <div class="water-bar-wrap"><div class="pbar-wrap"><div class="pbar-fill" id="waterBar" style="width:0%;background:linear-gradient(90deg,#06b6d4,#6366f1)"></div></div></div>
+      <div class="water-btns-row">
+        <div class="wb" onclick="addWater(200)">+200</div>
+        <div class="wb" onclick="addWater(350)">+350</div>
+        <div class="wb del" onclick="addWater(-200)">−</div>
+      </div>
     </div>
   </div>
 
-  <!-- 3. METRICS compact -->
+  <!-- 3. METRICS compact row -->
   <div class="metrics-row">
     <div class="gc metric-c tilt">
+      <div class="mc-icon"><svg viewBox="0 0 24 24" style="stroke:var(--a3)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="none"/></svg></div>
       <div class="mc-lbl">Calorias</div>
       <div class="mc-val" id="calsV">0</div>
       <div class="mc-unit">kcal</div>
       <div class="mc-bar"><div class="pbar-wrap"><div class="pbar-fill" id="calBar" style="width:0%;background:linear-gradient(90deg,#f43f5e,#f59e0b)"></div></div></div>
     </div>
     <div class="gc metric-c tilt">
+      <div class="mc-icon"><svg viewBox="0 0 24 24" style="stroke:var(--a2)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="mc-lbl">Minutos</div>
       <div class="mc-val" id="minsV">0</div>
       <div class="mc-unit">ativos</div>
       <div class="mc-bar"><div class="pbar-wrap"><div class="pbar-fill" id="minBar" style="width:0%;background:linear-gradient(90deg,#06b6d4,#6366f1)"></div></div></div>
     </div>
     <div class="gc metric-c tilt">
+      <div class="mc-icon"><svg viewBox="0 0 24 24" style="stroke:var(--a1)"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
       <div class="mc-lbl">Treinos</div>
       <div class="mc-val" id="wkCountV">0</div>
       <div class="mc-unit">semana</div>
@@ -780,7 +997,7 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
     <div class="bento-grid" id="bentoGrid"></div>
   </div>
 
-  <!-- 5. BOTTOM ROW: Date + Next Workout + Water -->
+  <!-- 5. BOTTOM ROW: Date + Next Workout -->
   <div class="bottom-row">
     <div class="gc date-widget tilt">
       <div class="dw-day" id="dwDay">Hoje</div>
@@ -796,18 +1013,18 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
         Iniciar
       </button>
     </div>
-    <div class="gc water-card tilt">
-      <div class="wc-lbl">Água</div>
-      <div class="wc-val" id="waterV">0.0</div>
-      <div class="wc-unit">/ <span id="waterGoal">2.0</span>L</div>
-      <div class="water-btns">
-        <div class="wb" onclick="addWater(200)">+200</div>
-        <div class="wb" onclick="addWater(350)">+350</div>
-        <div class="wb del" onclick="addWater(-200)">−</div>
-      </div>
-    </div>
   </div>
-  <div style="height:5px;flex-shrink:0"></div>
+  <!-- 6. WELLNESS NEWS CARD -->
+  <div class="news-section">
+    <div class="news-header">
+      <div class="news-title">Saúde &amp; Bem-estar</div>
+      <div class="news-dot"></div>
+    </div>
+    <div id="newsCardWrap"></div>
+    <div class="news-dots" id="newsDots"></div>
+  </div>
+
+  <div style="height:8px;flex-shrink:0"></div>
 </div>
 
 <!-- ══════════════ PAGE 1: TREINOS ══════════════ -->
@@ -820,7 +1037,40 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   <div style="height:14px"></div>
 </div>
 
-<!-- ══════════════ PAGE 2: PROFILE ══════════════ -->
+<!-- ══════════════ PAGE 2: SOCIAL ══════════════ -->
+<div class="pg" id="pg-social" style="overflow-y:auto;padding-bottom:calc(var(--nav)+var(--safe))">
+  <div class="page-brand">
+    <div class="pb-wordmark"><span class="pb-ranch">Ranch</span><span class="pb-fitness">Fitness</span></div>
+    <div class="pb-sub">Comunidade</div>
+  </div>
+
+  <!-- Search -->
+  <div class="social-search-wrap">
+    <svg class="social-search-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input class="social-search" id="socialSearch" placeholder="Buscar atletas…" oninput="filterAthletes(this.value)">
+  </div>
+
+  <!-- Tabs -->
+  <div class="social-tabs">
+    <div class="stab on" id="stab-discover" onclick="setSocialTab('discover',this)">Descobrir</div>
+    <div class="stab" id="stab-ranking" onclick="setSocialTab('ranking',this)">Ranking</div>
+    <div class="stab" id="stab-seguindo" onclick="setSocialTab('seguindo',this)">Seguindo</div>
+  </div>
+
+  <!-- My stats summary -->
+  <div class="ath-stats-row" id="myStatsSocial">
+    <div class="gc ath-stat tilt"><div class="as-val" id="ss-acts">0</div><div class="as-lbl">Atividades</div></div>
+    <div class="gc ath-stat tilt"><div class="as-val" id="ss-mins">0</div><div class="as-lbl">Minutos</div></div>
+    <div class="gc ath-stat tilt"><div class="as-val" id="ss-streak">0</div><div class="as-lbl">Sequência</div></div>
+  </div>
+
+  <!-- Feed content -->
+  <div class="social-section" id="socialSectionLbl">Atletas em Destaque</div>
+  <div id="socialFeed"></div>
+  <div style="height:14px"></div>
+</div>
+
+<!-- ══════════════ PAGE 3: PROFILE ══════════════ -->
 <div class="pg" id="pg-profile" style="overflow-y:auto;padding-bottom:calc(var(--nav)+var(--safe))">
   <div class="page-brand">
     <div class="pb-wordmark"><span class="pb-ranch">Ranch</span><span class="pb-fitness">Fitness</span></div>
@@ -846,7 +1096,6 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
     <div class="gc stat-c tilt"><div class="stat-v" id="stMins">0</div><div class="stat-l">Minutos</div></div>
     <div class="gc stat-c tilt"><div class="stat-v" id="stStreak">0</div><div class="stat-l">Sequência</div></div>
   </div>
-  <!-- Conquistas hidden per spec -->
   <div id="achGrid" style="display:none"></div>
   <div class="sec-h"><div class="sec-title">Histórico</div><div class="sec-act" onclick="openModal('mHistFull')">Ver tudo</div></div>
   <div style="padding:0 16px"><div id="histLast"></div></div>
@@ -855,7 +1104,7 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   <div style="height:14px"></div>
 </div>
 
-<!-- ══════════════ PAGE 3: WORKOUT DETAIL ══════════════ -->
+<!-- ══════════════ PAGE 4: WORKOUT DETAIL ══════════════ -->
 <div class="pg" id="pg-detail" style="overflow:hidden;display:flex;flex-direction:column">
   <div class="det-head" style="padding:0 16px;padding-top:50px;padding-bottom:14px">
     <div class="gc back-b tilt" id="backBtn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
@@ -875,13 +1124,65 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 </div><!-- /pages-wrap -->
 </div><!-- /app -->
 
-<!-- BOTTOM NAV -->
+<!-- BOTTOM NAV — 4 items · ordem visual: Home(0) Treinos(1) Social(2) Perfil(3) -->
 <nav class="bnav">
-  <div class="bni on" id="bn-home" onclick="goTab(0)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="bni-lbl">Home</span></div>
-  <div class="bni" id="bn-treinos" onclick="goTab(1)"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span class="bni-lbl">Treinos</span></div>
-  <div class="bni" id="bn-profile" onclick="goTab(2)"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bni-lbl">Perfil</span></div>
+  <div class="bni on" id="bn-home" onclick="goTab(0)">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="bni-lbl">Home</span>
+  </div>
+  <div class="bni" id="bn-treinos" onclick="goTab(1)">
+    <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    <span class="bni-lbl">Treinos</span>
+  </div>
+  <div class="bni" id="bn-social" onclick="goTab(2)">
+    <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    <span class="bni-lbl">Social</span>
+  </div>
+  <div class="bni" id="bn-profile" onclick="goTab(3)">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="bni-lbl">Perfil</span>
+  </div>
 </nav>
 <button class="fab" id="fab" onclick="openModal('mNewWk')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+
+<!-- ══ MODAL: SHARE WORKOUT ══ -->
+<div class="overlay" id="mShare">
+  <div class="modal" style="position:relative">
+    <div class="modal-close" onclick="closeModal('mShare')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    <div class="modal-head">
+      <div class="modal-handle"></div>
+      <div class="modal-title">Compartilhar Treino</div>
+      <div class="modal-sub">Adicione uma foto ou compartilhe o card padrão</div>
+    </div>
+    <div class="modal-body">
+      <!-- Canvas preview -->
+      <div class="share-canvas-wrap">
+        <canvas id="shareCanvas"></canvas>
+        <!-- Camera button overlay -->
+        <label class="share-photo-btn" for="sharePhotoIn" title="Tirar/adicionar foto">
+          <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </label>
+        <input type="file" id="sharePhotoIn" accept="image/*" capture="environment" style="display:none" onchange="onSharePhoto(event)">
+      </div>
+      <!-- Action buttons -->
+      <div class="share-actions">
+        <button class="share-btn primary" onclick="doShare()">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Compartilhar
+        </button>
+        <button class="share-btn" onclick="saveShareImage()">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Salvar Imagem
+        </button>
+        <button class="share-btn" onclick="shareToWhatsApp()">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          WhatsApp
+        </button>
+      </div>
+      <div style="height:4px"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ MODAL: ACTIVITY ══ -->
 <div class="overlay" id="mActivity">
@@ -977,6 +1278,35 @@ const S={
   str:(k,d='')=>{return localStorage.getItem(k)||d},
   setStr:(k,v)=>{try{localStorage.setItem(k,String(v))}catch{}}
 };
+
+/* ════════════════════════════════════════
+   TILT — declared first to guarantee hoisting in all engines
+════════════════════════════════════════ */
+function applyTilt(){
+  document.addEventListener('mousemove',function(e){
+    document.querySelectorAll('.tilt').forEach(function(c){
+      const r=c.getBoundingClientRect();
+      if(e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom){
+        const cx=(e.clientX-r.left)/r.width-.5, cy=(e.clientY-r.top)/r.height-.5;
+        c.style.transform='perspective(700px) rotateY('+(cx*7)+'deg) rotateX('+(-cy*7)+'deg) translateY(-2px) scale(1.01)';
+        c.style.borderColor='rgba(255,255,255,.11)';
+      } else { c.style.transform=''; c.style.borderColor=''; }
+    });
+  });
+  document.addEventListener('touchmove',function(e){
+    const t=e.touches[0];
+    document.querySelectorAll('.tilt').forEach(function(c){
+      const r=c.getBoundingClientRect();
+      if(t.clientX>r.left&&t.clientX<r.right&&t.clientY>r.top&&t.clientY<r.bottom){
+        const cx=(t.clientX-r.left)/r.width-.5, cy=(t.clientY-r.top)/r.height-.5;
+        c.style.transform='perspective(700px) rotateY('+(cx*5)+'deg) rotateX('+(-cy*5)+'deg) translateY(-2px)';
+      } else { c.style.transform=''; }
+    });
+  },{passive:true});
+  document.addEventListener('touchend',function(){
+    document.querySelectorAll('.tilt').forEach(function(c){ c.style.transform=''; c.style.borderColor=''; });
+  });
+}
 
 /* ════════════════════════════════════════
    STATE
@@ -1132,14 +1462,20 @@ function init(){
   updatePermUI();
   setInterval(setDate,60000);
   setInterval(checkDailyReset,60000);
-  setupSwipe(); applyTilt();
+  setupSwipe();
+  try { applyTilt(); } catch(e){ console.warn('applyTilt:', e); }
   registerSW();
+  buildPWAManifest(); // Generate canvas icon + inject manifest
+  initNews();         // Start wellness news carousel
   // auto-init pedo if permission already granted
   if(Perms.isGranted('motion')) initPedo();
   // restore theme pill
   const t=S.str('rf6_theme')||S.str('rf7_theme');
   const p=document.querySelector(`.tp[data-t="${t||'default'}"]`);
   if(p){ document.querySelectorAll('.tp').forEach(x=>x.classList.remove('act')); p.classList.add('act'); }
+  // Handle deep-link tab from shortcut URL (?tab=N)
+  const tabParam=new URLSearchParams(location.search).get('tab');
+  if(tabParam) setTimeout(()=>goTab(parseInt(tabParam)||0),300);
 }
 
 /* ════════════════════════════════════════
@@ -1192,24 +1528,38 @@ function setupSwipe(){
     if(swipeLocked) return;
     const dx=e.changedTouches[0].clientX-touchStartX;
     if(Math.abs(dx)>60){
-      if(dx<0&&curTab<2) goTab(curTab+1);
-      else if(dx>0&&curTab>0) goTab(curTab-1);
+      // Only swipe between nav tabs 0-3; block while in detail (4)
+      if(curTab===4) return;
+      if(dx<0 && curTab<3) goTab(curTab+1);
+      else if(dx>0 && curTab>0) goTab(curTab-1);
     }
   });
 }
+/* ════════════════════════════════════════
+   NAVIGATION — tab index === DOM physical slot
+   Slot 0: Home | 1: Treinos | 2: Social | 3: Perfil | 4: Detail (hidden)
+════════════════════════════════════════ */
 function goTab(t){
-  if(t===3){ // detail
-    document.getElementById('pagesWrap').style.transform=`translateX(-300vw)`;
+  // Detail page — slot 4, no nav highlight
+  if(t===4){
+    document.getElementById('pagesWrap').style.transform='translateX(-400vw)';
     document.querySelectorAll('.bni').forEach(b=>b.classList.remove('on'));
     document.getElementById('fab').style.display='none';
-    curTab=3; return;
+    curTab=4; return;
   }
-  if(t<0||t>2) return;
+  if(t<0||t>3) return;
   curTab=t;
+  // translateX: index === physical slot, no remapping needed
   document.getElementById('pagesWrap').style.transform=`translateX(-${t*100}vw)`;
   document.querySelectorAll('.bni').forEach(b=>b.classList.remove('on'));
-  ['bn-home','bn-treinos','bn-profile'][t] && document.getElementById(['bn-home','bn-treinos','bn-profile'][t]).classList.add('on');
+  // nav IDs in visual order matching tab indices
+  const navIds=['bn-home','bn-treinos','bn-social','bn-profile'];
+  const el=document.getElementById(navIds[t]);
+  if(el) el.classList.add('on');
+  // FAB only on Treinos tab
   document.getElementById('fab').style.display=t===1?'flex':'none';
+  // Trigger Social feed render lazily
+  if(t===2) renderSocialFeed();
 }
 
 /* ════════════════════════════════════════
@@ -1253,28 +1603,32 @@ function addWater(ml){
 /* ════════════════════════════════════════
    STATS
 ════════════════════════════════════════ */
+function el(id){ return document.getElementById(id); }
+function setEl(id,val){ const e=el(id); if(e) e.textContent=val; }
+function setW(id,pct){ const e=el(id); if(e) e.style.width=Math.min(pct,100)+'%'; }
+
 function updateStats(){
   checkDailyReset();
   const weekH=hist.filter(w=>new Date(w.ts||0)>=weekStart());
-  document.getElementById('calsV').textContent=daily.cals||0;
-  document.getElementById('minsV').textContent=daily.mins||0;
-  document.getElementById('wkCountV').textContent=weekH.length;
-  document.getElementById('calBar').style.width=Math.min((daily.cals||0)/goals.cals*100,100)+'%';
-  document.getElementById('minBar').style.width=Math.min((daily.mins||0)/goals.mins*100,100)+'%';
-  document.getElementById('wkBar').style.width=Math.min(weekH.length/5*100,100)+'%';
+  setEl('calsV', daily.cals||0);
+  setEl('minsV', daily.mins||0);
+  setEl('wkCountV', weekH.length);
+  setW('calBar', (daily.cals||0)/goals.cals*100);
+  setW('minBar', (daily.mins||0)/goals.mins*100);
+  setW('wkBar', weekH.length/5*100);
   // steps
-  const sPct=Math.min(Math.round((daily.steps||0)/goals.steps*100),100);
-  document.getElementById('stepsV').textContent=(daily.steps||0).toLocaleString('pt-BR');
-  document.getElementById('stepsPct').textContent=sPct+'%';
-  document.getElementById('stepsBar').style.width=sPct+'%';
-  // water
+  const sPct=Math.round((daily.steps||0)/goals.steps*100);
+  setEl('stepsV', (daily.steps||0).toLocaleString('pt-BR'));
+  setEl('stepsPct', sPct+'%');
+  setW('stepsBar', sPct);
+  // water — only update if elements exist
   const wL=((daily.water||0)/1000).toFixed(1);
-  document.getElementById('waterV').textContent=wL;
-  document.getElementById('waterGoal').textContent=(goals.water/1000).toFixed(1);
-  document.getElementById('waterBar').style.width=Math.min((daily.water||0)/goals.water*100,100)+'%';
-  // profile stats
-  document.getElementById('stTreinos').textContent=hist.length;
-  document.getElementById('stMins').textContent=hist.reduce((s,w)=>s+(w.dur||0),0);
+  setEl('waterV', wL);
+  setEl('waterGoal', (goals.water/1000).toFixed(1));
+  setW('waterBar', (daily.water||0)/goals.water*100);
+  // profile stats (hidden but kept in DOM)
+  setEl('stTreinos', hist.length);
+  setEl('stMins', hist.reduce((s,w)=>s+(w.dur||0),0));
   renderStreak();
 }
 
@@ -1390,9 +1744,13 @@ function finishActivity(){
     updateStats(); renderHistLast(); checkAch();
     document.getElementById(`ba_${actType.id}`)?.classList.add('active-act');
     pushNotif(`${actType.name} concluída!`,`${rec.dur}min · ${actDist.toFixed(1)}km · ${cals}kcal`);
-    showToast(`${actType.name} registrada!`);
+    showToast(`${actType.name} registrada! 🎉`);
+    // Open share modal
+    closeModal('mActivity');
+    openShareModal(rec);
+  } else {
+    closeModal('mActivity');
   }
-  closeModal('mActivity');
 }
 
 /* ════════════════════════════════════════
@@ -1410,7 +1768,7 @@ function renderWks(){
 }
 function promptDel(i){ haptic('light'); delIdx=i; document.getElementById('delWkTxt').textContent=`"${wks[i].name}" será removido.`; openModal('mDelWk'); }
 function confirmDelWk(){ haptic('medium'); if(delIdx<0)return; wks.splice(delIdx,1); S.set('rf7_wk',wks); renderWks(); updateNext(); closeModal('mDelWk'); showToast('Treino removido'); }
-function openDetail(i){ curWk=wks[i]; document.getElementById('detName').textContent=curWk.name; buildExercises(); resetChrono(); goTab(3); }
+function openDetail(i){ curWk=wks[i]; document.getElementById('detName').textContent=curWk.name; buildExercises(); resetChrono(); goTab(4); }
 document.getElementById('backBtn').onclick=()=>goTab(1);
 function buildExercises(){
   document.getElementById('exList').innerHTML=curWk.exercises.map((ex,i)=>{
@@ -1436,7 +1794,7 @@ function finishEx(i){
     daily.mins=(daily.mins||0)+dur; daily.cals=(daily.cals||0)+rec.cals; saveDaily();
     updateStats(); renderHistLast(); checkAch();
     pushNotif('Treino concluído! 🎉',`${curWk.name} — ${dur}min`);
-    setTimeout(()=>showToast('🎉 Treino concluído!'),200);
+    setTimeout(()=>{ showToast('🎉 Treino concluído!'); openShareModal(rec); },400);
   }
 }
 function updateNext(){
@@ -1645,13 +2003,429 @@ document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',func
 let toastT;
 function showToast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('on'),3200); }
 
-/* TILT */
-function applyTilt(){
-  document.addEventListener('mousemove',e=>{
-    document.querySelectorAll('.tilt').forEach(c=>{ const r=c.getBoundingClientRect(); if(e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom){ const cx=(e.clientX-r.left)/r.width-.5,cy=(e.clientY-r.top)/r.height-.5; c.style.transform=`perspective(700px) rotateY(${cx*7}deg) rotateX(${-cy*7}deg) translateY(-2px) scale(1.01)`; c.style.borderColor='rgba(255,255,255,.11)'; }else{ c.style.transform=''; c.style.borderColor=''; } }); });
-  document.addEventListener('touchmove',e=>{ const t=e.touches[0]; document.querySelectorAll('.tilt').forEach(c=>{ const r=c.getBoundingClientRect(); if(t.clientX>r.left&&t.clientX<r.right&&t.clientY>r.top&&t.clientY<r.bottom){ const cx=(t.clientX-r.left)/r.width-.5,cy=(t.clientY-r.top)/r.height-.5; c.style.transform=`perspective(700px) rotateY(${cx*5}deg) rotateX(${-cy*5}deg) translateY(-2px)`; }else c.style.transform=''; }); },{passive:true});
-  document.addEventListener('touchend',()=>document.querySelectorAll('.tilt').forEach(c=>{c.style.transform='';c.style.borderColor='';}));
+/* ════════════════════════════════════════
+   SHARE SYSTEM — Canvas-based workout card
+════════════════════════════════════════ */
+let shareRec=null, sharePhotoData=null;
+
+function openShareModal(rec){
+  shareRec=rec; sharePhotoData=null;
+  openModal('mShare');
+  setTimeout(()=>renderShareCanvas(),80);
 }
+
+function onSharePhoto(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{ sharePhotoData=ev.target.result; renderShareCanvas(); };
+  r.readAsDataURL(f);
+  e.target.value=''; // reset so same file can be re-selected
+}
+
+function renderShareCanvas(){
+  const canvas=document.getElementById('shareCanvas');
+  if(!canvas||!shareRec) return;
+  const W=canvas.offsetWidth||360, H=Math.round(W*1.25);
+  canvas.width=W*2; canvas.height=H*2; // retina
+  const ctx=canvas.getContext('2d');
+  ctx.scale(2,2);
+
+  // --- Background ---
+  if(sharePhotoData){
+    const img=new Image();
+    img.onload=()=>{
+      ctx.drawImage(img,0,0,W,H);
+      drawShareOverlay(ctx,W,H);
+    };
+    img.src=sharePhotoData;
+  } else {
+    // Gradient background
+    const grad=ctx.createLinearGradient(0,0,W,H);
+    grad.addColorStop(0,'#0d0e1a');
+    grad.addColorStop(.5,'#070e1c');
+    grad.addColorStop(1,'#060810');
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,W,H);
+    // Blob accents
+    const bgrad=ctx.createRadialGradient(W*.1,H*.1,0,W*.1,H*.1,W*.65);
+    bgrad.addColorStop(0,'rgba(99,102,241,.22)');
+    bgrad.addColorStop(1,'rgba(99,102,241,0)');
+    ctx.fillStyle=bgrad; ctx.fillRect(0,0,W,H);
+    const bgrad2=ctx.createRadialGradient(W*.9,H*.9,0,W*.9,H*.9,W*.5);
+    bgrad2.addColorStop(0,'rgba(6,182,212,.18)');
+    bgrad2.addColorStop(1,'rgba(6,182,212,0)');
+    ctx.fillStyle=bgrad2; ctx.fillRect(0,0,W,H);
+    drawShareOverlay(ctx,W,H);
+  }
+}
+
+function drawShareOverlay(ctx,W,H){
+  const pad=20, oH=130, oY=H-oH;
+
+  // Photo mode: dark gradient bar at bottom
+  if(sharePhotoData){
+    const ovGrad=ctx.createLinearGradient(0,oY-60,0,H);
+    ovGrad.addColorStop(0,'rgba(7,8,16,0)');
+    ovGrad.addColorStop(.35,'rgba(7,8,16,.85)');
+    ovGrad.addColorStop(1,'rgba(7,8,16,.97)');
+    ctx.fillStyle=ovGrad; ctx.fillRect(0,oY-60,W,H-(oY-60));
+  }
+
+  // Accent line
+  const acGrad=ctx.createLinearGradient(pad,0,W-pad,0);
+  acGrad.addColorStop(0,'#6366f1'); acGrad.addColorStop(1,'#06b6d4');
+  ctx.fillStyle=acGrad;
+  roundRect(ctx,pad,oY,W-pad*2,3,2); ctx.fill();
+
+  // Brand
+  ctx.fillStyle='rgba(238,242,255,.55)';
+  ctx.font='700 11px "Barlow Condensed", sans-serif';
+  ctx.letterSpacing='4px';
+  ctx.fillText('RANCH', pad, oY+22);
+  ctx.fillStyle='rgba(238,242,255,.22)';
+  ctx.fillText('FITNESS', pad+56, oY+22);
+
+  // Activity name
+  ctx.fillStyle='#eef2ff';
+  ctx.font='900 32px "Barlow Condensed", sans-serif';
+  ctx.letterSpacing='1px';
+  ctx.fillText(shareRec.name.toUpperCase(), pad, oY+56);
+
+  // Stats row
+  const stats=[
+    {v:`${shareRec.dur}`, u:'MIN'},
+    {v:`${shareRec.cals||0}`, u:'KCAL'},
+    {v:`${shareRec.dist?(shareRec.dist).toFixed(1):'—'}`, u:'KM'},
+  ];
+  let sx=pad;
+  stats.forEach(s=>{
+    ctx.fillStyle='#eef2ff';
+    ctx.font='800 22px "Barlow Condensed", sans-serif';
+    ctx.letterSpacing='.5px';
+    ctx.fillText(s.v, sx, oY+84);
+    ctx.fillStyle='rgba(238,242,255,.42)';
+    ctx.font='600 10px "Barlow Condensed", sans-serif';
+    ctx.letterSpacing='2px';
+    ctx.fillText(s.u, sx, oY+98);
+    sx+=62;
+  });
+
+  // Date
+  ctx.fillStyle='rgba(238,242,255,.35)';
+  ctx.font='500 10px "Plus Jakarta Sans", sans-serif';
+  ctx.letterSpacing='0px';
+  ctx.fillText(shareRec.date, pad, oY+118);
+
+  // Gradient badge top-right
+  if(!sharePhotoData){
+    const typeIco={'gym':'🏋️','walk':'🚶','run':'🏃','swim':'🏊','bike':'🚴','yoga':'🧘','hike':'🥾'}[shareRec.type]||'💪';
+    ctx.font='34px serif';
+    ctx.fillText(typeIco, W-pad-44, oY+62);
+  }
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+
+function getShareBlob(){
+  return new Promise(res=>{
+    document.getElementById('shareCanvas').toBlob(b=>res(b),'image/png',0.95);
+  });
+}
+
+async function doShare(){
+  haptic('medium');
+  try{
+    const blob=await getShareBlob();
+    const file=new File([blob],'ranch-fitness.png',{type:'image/png'});
+    const text=`${shareRec.name} • ${shareRec.dur}min • ${shareRec.cals||0}kcal 💪\n#RanchFitness`;
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],text});
+    } else if(navigator.share){
+      await navigator.share({title:'Ranch Fitness',text});
+    } else { saveShareImage(); }
+  }catch(e){ if(e.name!=='AbortError') saveShareImage(); }
+}
+
+function saveShareImage(){
+  haptic('light');
+  const a=document.createElement('a');
+  a.href=document.getElementById('shareCanvas').toDataURL('image/png',0.95);
+  a.download=`ranch-fitness-${shareRec?.name||'treino'}.png`;
+  a.click();
+  showToast('Imagem salva!');
+}
+
+function shareToWhatsApp(){
+  haptic('light');
+  const text=encodeURIComponent(`🏋️ *${shareRec?.name||'Treino'}* concluído!\n⏱ ${shareRec?.dur||0} min  🔥 ${shareRec?.cals||0} kcal  📍 ${(shareRec?.dist||0).toFixed(1)} km\n\n#RanchFitness`);
+  window.open(`https://wa.me/?text=${text}`,'_blank');
+}
+
+/* ════════════════════════════════════════
+   SOCIAL FEED
+════════════════════════════════════════ */
+let socialTabKey='discover', followSet=new Set(JSON.parse(localStorage.getItem('rf7_follows')||'[]'));
+
+const MOCK_ATHLETES=[
+  {id:'a1',name:'Lucas Martins',level:'Avançado',goal:'Hipertrofia',acts:47,mins:2340,streak:12,badge:'elite',initials:'LM'},
+  {id:'a2',name:'Ana Souza',level:'Intermediário',goal:'Resistência',acts:31,mins:1560,streak:7,badge:'fire',initials:'AS'},
+  {id:'a3',name:'Pedro Lima',level:'Atleta Profissional',goal:'Força Máxima',acts:89,mins:4200,streak:24,badge:'elite',initials:'PL'},
+  {id:'a4',name:'Mariana Costa',level:'Iniciante',goal:'Saúde Geral',acts:8,mins:380,streak:3,badge:'new',initials:'MC'},
+  {id:'a5',name:'Rafael Torres',level:'Intermediário',goal:'Emagrecimento',acts:22,mins:1100,streak:5,badge:'fire',initials:'RT'},
+  {id:'a6',name:'Fernanda Alves',level:'Avançado',goal:'Definição',acts:61,mins:3050,streak:18,badge:'elite',initials:'FA'},
+  {id:'a7',name:'Bruno Neves',level:'Intermediário',goal:'Hipertrofia',acts:34,mins:1700,streak:9,badge:'fire',initials:'BN'},
+  {id:'a8',name:'Juliana Moura',level:'Iniciante',goal:'Saúde Geral',acts:5,mins:210,streak:2,badge:'new',initials:'JM'},
+];
+
+function setSocialTab(key,el){
+  socialTabKey=key;
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  const lbl={discover:'Atletas em Destaque',ranking:'Ranking Semanal',seguindo:'Seguindo'};
+  setEl('socialSectionLbl', lbl[key]||'');
+  renderSocialFeed();
+}
+
+function filterAthletes(q){
+  renderSocialFeed(q.toLowerCase().trim());
+}
+
+function renderSocialFeed(query=''){
+  // Update my stats
+  setEl('ss-acts', hist.length);
+  setEl('ss-mins', hist.reduce((s,w)=>s+(w.dur||0),0));
+  setEl('ss-streak', document.getElementById('streakN')?.textContent||'0');
+
+  const feed=document.getElementById('socialFeed'); if(!feed) return;
+  let athletes=MOCK_ATHLETES;
+  if(query) athletes=athletes.filter(a=>a.name.toLowerCase().includes(query)||a.level.toLowerCase().includes(query)||a.goal.toLowerCase().includes(query));
+
+  if(socialTabKey==='ranking'){
+    // Sort by acts
+    const ranked=[...athletes].sort((a,b)=>b.acts-a.acts);
+    const me={id:'me',name:prof.name||'Você',level:prof.level||'Intermediário',goal:prof.goal||'Hipertrofia',acts:hist.length,mins:hist.reduce((s,w)=>s+(w.dur||0),0),streak:parseInt(document.getElementById('streakN')?.textContent||'0'),badge:'new',initials:(prof.name||'Eu').substring(0,2).toUpperCase()};
+    ranked.push(me); ranked.sort((a,b)=>b.acts-a.acts);
+    feed.innerHTML=ranked.map((a,i)=>{
+      const pos=i+1;
+      const cls=pos===1?'gold':pos===2?'silver':pos===3?'bronze':'';
+      return`<div class="gc ranking-row tilt">
+        <div class="rank-pos ${cls}">${pos}</div>
+        <div class="rank-info"><div class="rank-name">${a.name}${a.id==='me'?' (você)':''}</div><div class="rank-sub">${a.level} · ${a.goal}</div></div>
+        <div class="rank-score">${a.acts} <span style="font-size:10px;color:var(--t3)">ativ.</span></div>
+      </div>`;
+    }).join('');
+  } else if(socialTabKey==='seguindo'){
+    const following=athletes.filter(a=>followSet.has(a.id));
+    if(!following.length){ feed.innerHTML=`<div style="text-align:center;padding:40px 20px;color:var(--t3);font-size:13px">Siga atletas para ver o feed deles aqui.</div>`; return; }
+    feed.innerHTML=following.map(a=>athleteCard(a)).join('');
+  } else {
+    feed.innerHTML=athletes.map(a=>athleteCard(a)).join('');
+  }
+}
+
+function athleteCard(a){
+  const f=followSet.has(a.id);
+  return`<div class="gc athlete-card tilt">
+    <div class="ath-av">${a.initials}</div>
+    <div class="ath-info">
+      <div class="ath-name">${a.name}</div>
+      <div class="ath-meta">${a.level} · ${a.acts} atividades · 🔥${a.streak}d</div>
+    </div>
+    <span class="ath-badge ${a.badge}">${a.badge==='elite'?'Elite':a.badge==='fire'?'🔥 Ativo':'Novo'}</span>
+    <button class="follow-btn ${f?'following':''}" onclick="toggleFollow('${a.id}',this)">${f?'Seguindo':'Seguir'}</button>
+  </div>`;
+}
+
+function toggleFollow(id,btn){
+  haptic('light');
+  if(followSet.has(id)){ followSet.delete(id); btn.textContent='Seguir'; btn.classList.remove('following'); }
+  else{ followSet.add(id); btn.textContent='Seguindo'; btn.classList.add('following'); showToast('Seguindo atleta!'); }
+  localStorage.setItem('rf7_follows',JSON.stringify([...followSet]));
+}
+
+/* ════════════════════════════════════════
+   PWA MANIFEST — canvas-generated glassmorphism icon
+   Eliminates need for external icon files
+════════════════════════════════════════ */
+function buildPWAManifest(){
+  const sz=512;
+  const cv=document.createElement('canvas');
+  cv.width=sz; cv.height=sz;
+  const ctx=cv.getContext('2d');
+
+  // Background gradient
+  const bg=ctx.createLinearGradient(0,0,sz,sz);
+  bg.addColorStop(0,'#0d0f1e'); bg.addColorStop(.5,'#070e1c'); bg.addColorStop(1,'#060810');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,sz,sz);
+
+  // Blob glow — indigo
+  const g1=ctx.createRadialGradient(sz*.22,sz*.22,0,sz*.22,sz*.22,sz*.56);
+  g1.addColorStop(0,'rgba(99,102,241,.6)'); g1.addColorStop(1,'rgba(99,102,241,0)');
+  ctx.fillStyle=g1; ctx.fillRect(0,0,sz,sz);
+
+  // Blob glow — cyan
+  const g2=ctx.createRadialGradient(sz*.82,sz*.78,0,sz*.82,sz*.78,sz*.44);
+  g2.addColorStop(0,'rgba(6,182,212,.5)'); g2.addColorStop(1,'rgba(6,182,212,0)');
+  ctx.fillStyle=g2; ctx.fillRect(0,0,sz,sz);
+
+  // Glass card shape
+  const pad=sz*.1, r=sz*.16;
+  function rr(x,y,w,h,rad){
+    ctx.beginPath();
+    ctx.moveTo(x+rad,y); ctx.lineTo(x+w-rad,y); ctx.quadraticCurveTo(x+w,y,x+w,y+rad);
+    ctx.lineTo(x+w,y+h-rad); ctx.quadraticCurveTo(x+w,y+h,x+w-rad,y+h);
+    ctx.lineTo(x+rad,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-rad);
+    ctx.lineTo(x,y+rad); ctx.quadraticCurveTo(x,y,x+rad,y); ctx.closePath();
+  }
+  rr(pad,pad,sz-pad*2,sz-pad*2,r);
+  ctx.fillStyle='rgba(255,255,255,.07)'; ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=sz*.009; ctx.stroke();
+
+  // Diagonal glass shine
+  const sh=ctx.createLinearGradient(pad,pad,pad+sz*.4,pad+sz*.4);
+  sh.addColorStop(0,'rgba(255,255,255,.24)'); sh.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=sh; rr(pad,pad,sz-pad*2,sz-pad*2,r); ctx.fill();
+
+  // Big "R" — gradient fill
+  ctx.save();
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  const tg=ctx.createLinearGradient(sz*.2,sz*.2,sz*.8,sz*.8);
+  tg.addColorStop(0,'#818cf8'); tg.addColorStop(.5,'#6366f1'); tg.addColorStop(1,'#06b6d4');
+  ctx.fillStyle=tg;
+  ctx.font=`900 ${sz*.52}px Arial Black, sans-serif`;
+  ctx.fillText('R',sz*.44,sz*.44);
+
+  // Small "FITNESS" label
+  ctx.fillStyle='rgba(238,242,255,.32)';
+  ctx.font=`700 ${sz*.11}px Arial, sans-serif`;
+  ctx.letterSpacing='4px';
+  ctx.fillText('FITNESS',sz*.5,sz*.76);
+  ctx.restore();
+
+  const dataUrl=cv.toDataURL('image/png');
+
+  // Set apple touch icons
+  document.getElementById('atiLink').href=dataUrl;
+  document.getElementById('atiLink180').href=dataUrl;
+
+  // Build & inject manifest
+  const manifest={
+    name:'Ranch Fitness',
+    short_name:'Ranch',
+    description:'Seu companheiro de treino inteligente.',
+    start_url:'./',
+    scope:'./',
+    display:'standalone',
+    orientation:'portrait-primary',
+    background_color:'#070810',
+    theme_color:'#070810',
+    lang:'pt-BR',
+    categories:['fitness','health','sports'],
+    icons:[
+      {src:dataUrl,sizes:'512x512',type:'image/png',purpose:'any'},
+      {src:dataUrl,sizes:'512x512',type:'image/png',purpose:'maskable'},
+      {src:dataUrl,sizes:'192x192',type:'image/png',purpose:'any'},
+      {src:dataUrl,sizes:'180x180',type:'image/png',purpose:'any'},
+    ],
+    shortcuts:[
+      {name:'Meus Treinos',short_name:'Treinos',url:'./?tab=1',icons:[{src:dataUrl,sizes:'96x96'}]},
+      {name:'Comunidade',short_name:'Social',url:'./?tab=2',icons:[{src:dataUrl,sizes:'96x96'}]},
+    ]
+  };
+  const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+  document.getElementById('manifestLink').href=URL.createObjectURL(blob);
+}
+
+/* ════════════════════════════════════════
+   WELLNESS NEWS CARDS — Daily rotating health tips
+   Rotação baseada no dia do ano (sem API key necessária)
+   Para usar NewsAPI: busque /v2/everything?q=fitness+health&language=pt
+   e substitua NEWS_DB pelo array de articles retornado.
+════════════════════════════════════════ */
+const NEWS_DB=[
+  {cat:'Nutrição',cc:'#10b981',cb:'rgba(16,185,129,.14)',emoji:'🥗',ga:'rgba(16,185,129,.2)',gb:'rgba(6,182,212,.06)',headline:'Proteína no café da manhã melhora controle do peso',body:'Consumir 25–30g de proteína pela manhã reduz a fome ao longo do dia e preserva massa muscular durante o deficit calórico.',source:'Journal of Nutrition'},
+  {cat:'Performance',cc:'#6366f1',cb:'rgba(99,102,241,.14)',emoji:'⚡',ga:'rgba(99,102,241,.22)',gb:'rgba(244,63,94,.06)',headline:'Zona 2 de cardio acelera recuperação muscular',body:'30 min de cardio leve (você consegue conversar) aumentam fluxo sanguíneo e removem lactato dos músculos mais rápido.',source:'Sports Medicine Review'},
+  {cat:'Sono',cc:'#f59e0b',cb:'rgba(245,158,11,.14)',emoji:'🌙',ga:'rgba(245,158,11,.18)',gb:'rgba(99,102,241,.06)',headline:'Menos de 7h de sono reduz ganhos de força em 12%',body:'Privação de sono interfere diretamente na síntese proteica e na liberação de GH, comprometendo seus resultados.',source:'Sleep Foundation'},
+  {cat:'Hidratação',cc:'#06b6d4',cb:'rgba(6,182,212,.14)',emoji:'💧',ga:'rgba(6,182,212,.22)',gb:'rgba(16,185,129,.06)',headline:'2% de desidratação já prejudica sua performance',body:'Quedas mínimas de hidratação reduzem força, potência e concentração. Beba antes de sentir sede.',source:'ACSM Guidelines'},
+  {cat:'Mobilidade',cc:'#f43f5e',cb:'rgba(244,63,94,.14)',emoji:'🧘',ga:'rgba(244,63,94,.2)',gb:'rgba(245,158,11,.06)',headline:'10 min de mobilidade reduzem risco de lesão em 30%',body:'Incorporar mobilidade articular antes do treino melhora amplitude de movimento e ativa padrões neuromusculares.',source:'NSCA Journal'},
+  {cat:'Mentalidade',cc:'#8b5cf6',cb:'rgba(139,92,246,.14)',emoji:'🧠',ga:'rgba(139,92,246,.22)',gb:'rgba(6,182,212,.06)',headline:'Visualização mental melhora força em até 13,5%',body:'Praticar a visualização de exercícios ativa vias neurais similares ao treino real, acelerando o aprendizado motor.',source:'Frontiers in Psychology'},
+  {cat:'Recuperação',cc:'#10b981',cb:'rgba(16,185,129,.14)',emoji:'🔋',ga:'rgba(16,185,129,.18)',gb:'rgba(99,102,241,.06)',headline:'Quando o banho frio ajuda (e quando atrapalha)',body:'Imersão em água fria pós-treino reduz dor muscular mas pode atenuar adaptações de força se usado diariamente.',source:'British J. Sports Medicine'},
+];
+
+let newsIdx=0, newsTimer=null;
+
+function initNews(){
+  // Seed index pelo dia do ano — conteúdo diferente a cada dia
+  const doy=Math.floor((Date.now()-new Date(new Date().getFullYear(),0,0))/864e5);
+  newsIdx=doy%NEWS_DB.length;
+  renderNewsCard(false);
+  newsTimer=setInterval(()=>{ newsIdx=(newsIdx+1)%NEWS_DB.length; renderNewsCard(true); },7000);
+}
+
+function renderNewsCard(animate){
+  const wrap=document.getElementById('newsCardWrap');
+  const dots=document.getElementById('newsDots');
+  if(!wrap) return;
+  const n=NEWS_DB[newsIdx];
+
+  // Update dots immediately (safe — no conflict with innerHTML)
+  if(dots){
+    let dHTML='';
+    for(let i=0;i<NEWS_DB.length;i++) dHTML+='<div class="ndot'+(i===newsIdx?' on':'')+'"></div>';
+    dots.innerHTML=dHTML;
+  }
+
+  if(animate){
+    // Fade out, swap, fade in — avoid cssText race condition
+    wrap.style.opacity='0';
+    wrap.style.transform='translateX(20px)';
+    wrap.style.transition='opacity .18s ease, transform .18s ease';
+    setTimeout(function(){
+      _injectNews(wrap,n);
+      // Force reflow then animate in
+      wrap.offsetHeight; // eslint-disable-line
+      wrap.style.opacity='1';
+      wrap.style.transform='translateX(0)';
+    }, 190);
+  } else {
+    wrap.style.opacity='1';
+    wrap.style.transform='none';
+    wrap.style.transition='';
+    _injectNews(wrap,n);
+  }
+}
+
+function _injectNews(wrap,n){
+  wrap.innerHTML=
+    '<div class="news-card" onclick="newsNext()">'
+    +'<div class="news-emoji-bg">'+n.emoji+'</div>'
+    +'<div class="news-gradient-overlay" style="background:linear-gradient(135deg,'+n.ga+' 0%,'+n.gb+' 55%,transparent 100%)"></div>'
+    +'<div class="news-content">'
+    +'<div class="news-pill" style="background:'+n.cb+';color:'+n.cc+';border:1px solid '+n.cc+'55">'+n.emoji+' '+n.cat+'</div>'
+    +'<div class="news-headline">'+n.headline+'</div>'
+    +'<div class="news-body">'+n.body+'</div>'
+    +'<div class="news-footer">'
+    +'<div class="news-source">'+n.source+'</div>'
+    +'<div class="news-read">Próxima <svg viewBox="0 0 24 24" style="width:10px;height:10px;fill:none;stroke:var(--a2);stroke-width:2.5;stroke-linecap:round;vertical-align:middle"><polyline points="9 18 15 12 9 6"/></svg></div>'
+    +'</div>'
+    +'</div>'
+    +'</div>';
+}
+
+function newsNext(){
+  clearInterval(newsTimer);
+  newsIdx=(newsIdx+1)%NEWS_DB.length;
+  renderNewsCard(true);
+  newsTimer=setInterval(()=>{ newsIdx=(newsIdx+1)%NEWS_DB.length; renderNewsCard(true); },7000);
+}
+
 </script>
 </body>
 </html>
