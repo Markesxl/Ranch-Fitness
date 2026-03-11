@@ -84,16 +84,22 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   will-change:opacity,transform }
 #splash.out { opacity:0; transform:scale(1.03); pointer-events:none }
 .spl-brand { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0 }
-.spl-ranch { font-family:'Barlow Condensed',sans-serif; font-weight:900;
-  font-size:clamp(42px,14vw,72px);
-  letter-spacing:8px; text-transform:uppercase; line-height:1;
+/* "Ranch" — heavy anchor word */
+.spl-ranch {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size: clamp(52px,16vw,80px);
+  letter-spacing: 10px; text-transform:uppercase; line-height:1;
   background:linear-gradient(135deg,#6366f1,#06b6d4 55%,#10b981);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent }
-.spl-fit { font-family:'Barlow Condensed',sans-serif; font-weight:700;
-  font-size:clamp(42px,14vw,72px);
-  letter-spacing:8px; text-transform:uppercase; line-height:1;
-  color:rgba(238,242,255,.22); -webkit-text-fill-color:rgba(238,242,255,.22);
-  margin-left:0; margin-top:-4px }
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+/* "Fitness" — light subtitle feel */
+.spl-fit {
+  font-family:'Barlow Condensed',sans-serif; font-weight:300;
+  font-size: clamp(22px,6.5vw,34px);
+  letter-spacing: 10px; text-transform:uppercase; line-height:1;
+  color:rgba(238,242,255,.38); -webkit-text-fill-color:rgba(238,242,255,.38);
+  margin-top: 2px;
+}
 .spl-bar-wrap { margin-top:48px; width:110px; height:2px; background:rgba(255,255,255,.07); border-radius:2px; overflow:hidden }
 .spl-bar { height:100%; width:0; background:linear-gradient(90deg,#6366f1,#06b6d4,#10b981); border-radius:2px;
   animation:barF 2.6s cubic-bezier(.4,0,.2,1) .4s forwards }
@@ -110,12 +116,22 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
    NON-CRITICAL CSS — layout, components, interactions
 ═══════════════════════════════════════════════════════ */
 
-/* GLASS SYSTEM — improved opacity & blur for better readability */
-.gc { background:rgba(255,255,255,.055); backdrop-filter:blur(36px) saturate(240%); -webkit-backdrop-filter:blur(36px) saturate(240%);
-  border:1px solid rgba(255,255,255,.10); border-radius:var(--r1); position:relative; overflow:hidden }
-.gc::before { content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-  background:linear-gradient(145deg,rgba(255,255,255,.07) 0%,transparent 50%) }
-.gc.hi { background:rgba(255,255,255,.085); border-color:rgba(255,255,255,.16) }
+/* GLASS SYSTEM — lighter opacity so bg image/blobs show through */
+.gc {
+  background: rgba(255,255,255,.028);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--r1); position: relative; overflow: hidden;
+}
+.gc::before {
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background: linear-gradient(145deg, rgba(255,255,255,.055) 0%, transparent 55%);
+}
+.gc.hi {
+  background: rgba(255,255,255,.048);
+  border-color: rgba(255,255,255,.12);
+}
 
 /* TILT cards */
 .tilt { transition:transform .24s cubic-bezier(.4,0,.2,1),border-color .24s }
@@ -278,17 +294,17 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .hh-brand-row { display:flex; flex-direction:column; align-items:center; gap:0; justify-content:center }
 .hh-brand .ranch {
   font-family:'Barlow Condensed',sans-serif; font-weight:900;
-  font-size: clamp(1.3rem, 6vw, 1.75rem);
-  letter-spacing: 0.3rem; text-transform:uppercase; line-height:1;
+  font-size: clamp(1.5rem, 7vw, 2rem);
+  letter-spacing: 0.35rem; text-transform:uppercase; line-height:1;
   background:var(--ag); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   white-space: nowrap;
 }
 .hh-brand .fitness {
-  font-family:'Barlow Condensed',sans-serif; font-weight:700;
-  font-size: clamp(1.3rem, 6vw, 1.75rem);
-  letter-spacing: 0.3rem; text-transform:uppercase; line-height:1;
-  color:rgba(238,242,255,.22); -webkit-text-fill-color:rgba(238,242,255,.22);
-  margin-top:-3px; white-space: nowrap;
+  font-family:'Barlow Condensed',sans-serif; font-weight:300;
+  font-size: clamp(0.75rem, 3.2vw, 1rem);
+  letter-spacing: 0.35rem; text-transform:uppercase; line-height:1;
+  color:rgba(238,242,255,.4); -webkit-text-fill-color:rgba(238,242,255,.4);
+  margin-top: 1px; white-space: nowrap;
 }
 .hh-brand .greet { font-size:11px; color:var(--t3); margin-top:4px; letter-spacing:.5px }
 .hh-left-spacer { display:none }
@@ -304,16 +320,16 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .pb-wordmark { display:flex; flex-direction:column; align-items:center; gap:0 }
 .pb-ranch {
   font-family:'Barlow Condensed',sans-serif; font-weight:900;
-  font-size: clamp(1.2rem, 5.5vw, 1.5rem);
-  letter-spacing: 0.3rem; text-transform:uppercase;
+  font-size: clamp(1.3rem, 6vw, 1.7rem);
+  letter-spacing: 0.32rem; text-transform:uppercase;
   background:var(--ag); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   line-height:1; white-space: nowrap;
 }
 .pb-fitness {
-  font-family:'Barlow Condensed',sans-serif; font-weight:700;
-  font-size: clamp(1.2rem, 5.5vw, 1.5rem);
-  letter-spacing: 0.3rem; text-transform:uppercase; line-height:1; margin-top:-3px;
-  color:rgba(238,242,255,.25); -webkit-text-fill-color:rgba(238,242,255,.25);
+  font-family:'Barlow Condensed',sans-serif; font-weight:300;
+  font-size: clamp(0.65rem, 2.8vw, 0.875rem);
+  letter-spacing: 0.32rem; text-transform:uppercase; line-height:1; margin-top: 1px;
+  color:rgba(238,242,255,.38); -webkit-text-fill-color:rgba(238,242,255,.38);
   white-space: nowrap;
 }
 .pb-sub {
@@ -336,6 +352,7 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .sd { width:18px; height:3px; border-radius:2px; background:rgba(255,255,255,.08); transition:background .3s }
 .sd.done { background:var(--a4) }
 .sd.today { background:var(--ag); box-shadow:0 0 7px rgba(99,102,241,.4) }
+.sd.future { background:rgba(255,255,255,.04); opacity:.45 }
 
 /* STEPS CARD — compact single row, same height/style as streak banner */
 .steps-card {
@@ -432,25 +449,44 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
 .install-banner {
   margin: 0 16px 12px; padding: 14px 16px;
   display: flex; align-items: center; gap: 13px;
-  cursor: pointer; transition: transform .2s;
+  cursor: pointer; transition: transform .2s, border-color .3s;
   border-radius: var(--r1);
 }
 .install-banner:active { transform: scale(.98) }
+/* Default icon */
 .install-ico {
   width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, rgba(99,102,241,.22), rgba(6,182,212,.15));
   border: 1px solid rgba(99,102,241,.25);
+  transition: background .3s, border-color .3s;
 }
 .install-ico svg { width: 22px; height: 22px; fill: none; stroke: var(--a1); stroke-width: 1.8; stroke-linecap: round }
 .install-text { flex: 1; min-width: 0 }
 .install-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: .5px; line-height: 1.1 }
-.install-sub { font-size: 11px; color: var(--t3); margin-top: 2px }
+.install-sub { font-size: 11px; color: var(--t3); margin-top: 2px; line-height: 1.4 }
 .install-arrow { flex-shrink: 0 }
-.install-arrow svg { width: 18px; height: 18px; fill: none; stroke: var(--a1); stroke-width: 2; stroke-linecap: round }
+.install-arrow svg { width: 18px; height: 18px; fill: none; stroke: var(--a1); stroke-width: 2; stroke-linecap: round; transition: stroke .3s }
+/* State: native install prompt is available — subtle pulse on border */
+.install-banner.ready {
+  border-color: rgba(99,102,241,.45);
+  animation: installPulse 3s ease-in-out infinite;
+}
+@keyframes installPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(99,102,241,0) }
+  50%      { box-shadow: 0 0 0 4px rgba(99,102,241,.15) }
+}
+/* State: already installed */
+.install-banner.installed {
+  cursor: default; pointer-events: none;
+}
 .install-banner.installed .install-ico { background: linear-gradient(135deg, rgba(16,185,129,.22), rgba(6,182,212,.15)); border-color: rgba(16,185,129,.3) }
 .install-banner.installed .install-ico svg { stroke: var(--a5) }
 .install-banner.installed .install-arrow svg { stroke: var(--a5) }
+/* State: iOS — show share hint */
+.install-banner.ios .install-ico { background: linear-gradient(135deg, rgba(6,182,212,.2), rgba(99,102,241,.15)); border-color: rgba(6,182,212,.3) }
+.install-banner.ios .install-ico svg { stroke: var(--a2) }
+.install-banner.ios .install-arrow svg { stroke: var(--a2) }
 .sec-act { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px;
   text-transform:uppercase; color:var(--a2); cursor:pointer; transition:opacity .2s }
 .sec-act:active { opacity:.6 }
@@ -825,8 +861,10 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
   border-radius:50%; background:rgba(0,0,0,.6); border:1.5px solid rgba(255,255,255,.2);
   display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s }
 .share-photo-btn svg { width:18px; height:18px; fill:none; stroke:#fff; stroke-width:1.7;
-  stroke-linecap:round; stroke-linejoin:round }
+  stroke-linecap:round; stroke-linejoin:round; pointer-events:none }
 .share-photo-btn:active { transform:scale(.88) }
+/* Gallery button sits left of the camera button */
+.share-gallery-btn { right: 56px !important }
 .share-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:10px }
 .share-btn { padding:11px 8px; border-radius:var(--r2); border:1px solid var(--ge);
   background:var(--g0); font-family:'Barlow Condensed',sans-serif; font-size:13px;
@@ -1320,10 +1358,16 @@ body.has-bg::before { content:''; position:fixed; inset:0; z-index:0; pointer-ev
       <div class="share-canvas-wrap">
         <canvas id="shareCanvas"></canvas>
         <!-- Camera button overlay -->
-        <label class="share-photo-btn" for="sharePhotoIn" title="Tirar/adicionar foto">
+        <label class="share-photo-btn" for="sharePhotoIn" title="Tirar foto com câmera">
           <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </label>
+        <!-- camera: forces camera on mobile -->
         <input type="file" id="sharePhotoIn" accept="image/*" capture="environment" style="display:none" onchange="onSharePhoto(event)">
+        <!-- gallery: opens media library picker (no capture attribute) -->
+        <label class="share-photo-btn share-gallery-btn" for="shareGalleryIn" title="Escolher da galeria" style="right:56px">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </label>
+        <input type="file" id="shareGalleryIn" accept="image/*" style="display:none" onchange="onSharePhoto(event)">
       </div>
       <!-- Action buttons -->
       <div class="share-actions">
@@ -1497,28 +1541,81 @@ let curTab=0,touchStartX=0,touchStartY=0,swipeLocked=false;
 const Perms = {
   _state: S.get('rf7_perms',{motion:'unknown',geo:'unknown'}),
   _save(){ S.set('rf7_perms',this._state) },
+
+  /**
+   * Detects best available motion API:
+   *  1. Generic Sensor API (Accelerometer) — Chrome 67+
+   *  2. DeviceMotionEvent (iOS 13+ requires permission, Android auto-granted)
+   *  3. Unavailable — explains why to user
+   */
   async requestAll(){
     let changed=false;
-    // Motion
+
+    // ── Motion / Step detection ──
     if(this._state.motion==='unknown'){
-      if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){
-        try{ const r=await DeviceMotionEvent.requestPermission(); this._state.motion=r==='granted'?'granted':'denied'; changed=true; }
-        catch{ this._state.motion='denied'; changed=true; }
-      } else if(window.DeviceMotionEvent){ this._state.motion='granted'; changed=true; }
-      else { this._state.motion='unavailable'; changed=true; }
+      if(typeof Accelerometer !== 'undefined'){
+        // Generic Sensor API (Chrome 67+, requires Feature-Policy on iframe)
+        try{
+          const sensor=new Accelerometer({frequency:50});
+          await new Promise((res,rej)=>{
+            sensor.addEventListener('activate',()=>{ sensor.stop(); res('granted'); });
+            sensor.addEventListener('error',rej);
+            sensor.start();
+          });
+          this._state.motion='granted'; changed=true;
+        } catch(e){
+          if(e.name==='NotAllowedError'){
+            this._state.motion='denied'; changed=true;
+            showToast('⚠ Acesso ao acelerômetro negado. Verifique permissões.');
+          } else {
+            // Fallback to DeviceMotion
+            this._state.motion='unavailable'; changed=true;
+          }
+        }
+      } else if(typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function'){
+        // iOS 13+ — requires explicit user gesture permission
+        try{
+          const r = await DeviceMotionEvent.requestPermission();
+          this._state.motion = r==='granted' ? 'granted' : 'denied';
+          changed=true;
+          if(r!=='granted') showToast('⚠ Permissão de movimento negada. Pedômetro inativo.');
+        } catch(e){
+          this._state.motion='denied'; changed=true;
+          showToast('⚠ Não foi possível solicitar permissão de movimento.');
+        }
+      } else if(window.DeviceMotionEvent){
+        // Android / non-iOS — auto-granted
+        this._state.motion='granted'; changed=true;
+      } else {
+        this._state.motion='unavailable'; changed=true;
+        showToast('ℹ Sensor de movimento não disponível neste dispositivo.');
+      }
     }
-    // Geolocation
+
+    // ── Geolocation ──
     if(this._state.geo==='unknown'){
       if(navigator.geolocation){
         await new Promise(resolve=>{
           navigator.geolocation.getCurrentPosition(
             ()=>{ this._state.geo='granted'; changed=true; resolve(); },
-            (e)=>{ this._state.geo=e.code===1?'denied':'unavailable'; changed=true; resolve(); },
+            (e)=>{
+              if(e.code===1){
+                this._state.geo='denied'; changed=true;
+                showToast('⚠ Localização negada. Distância GPS inativa.');
+              } else {
+                this._state.geo='unavailable'; changed=true;
+              }
+              resolve();
+            },
             {timeout:5000}
           );
         });
-      } else { this._state.geo='unavailable'; changed=true; }
+      } else {
+        this._state.geo='unavailable'; changed=true;
+        showToast('ℹ GPS não disponível neste dispositivo.');
+      }
     }
+
     if(changed) this._save();
     updatePermUI();
     return { motion:this._state.motion==='granted', geo:this._state.geo==='granted' };
@@ -1604,7 +1701,31 @@ const ACTS=[
 const DAYS=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
 const MOS=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 function todayStr(){ return new Date().toLocaleDateString('pt-BR') }
-function weekStart(){ const d=new Date(); d.setDate(d.getDate()-d.getDay()); d.setHours(0,0,0,0); return d }
+
+/**
+ * weekStart — Monday 00:00:00 of the current ISO week
+ * getDay() → 0=Sun,1=Mon…6=Sat
+ * adjustment: Sun→6 days back, Mon→0, Tue→1 … Sat→5
+ */
+function weekStart(){
+  const d=new Date();
+  const dow=d.getDay(); // 0=Sun
+  const daysBack = (dow===0) ? 6 : dow-1; // Mon=first day
+  d.setDate(d.getDate()-daysBack);
+  d.setHours(0,0,0,0);
+  return d;
+}
+
+/**
+ * weekEnd — Sunday 23:59:59 that closes the current ISO week
+ */
+function weekEnd(){
+  const s=weekStart();
+  const e=new Date(s);
+  e.setDate(e.getDate()+6); // +6 days = Sunday
+  e.setHours(23,59,59,999);
+  return e;
+}
 function p2(n){ return String(n).padStart(2,'0') }
 function fmtSec(s){ return`${p2(Math.floor(s/3600))}:${p2(Math.floor((s%3600)/60))}:${p2(s%60)}` }
 
@@ -1740,15 +1861,23 @@ function renderStreak(){
   const s=calcStreak();
   document.getElementById('streakN').textContent=s;
   document.getElementById('stStreak').textContent=s;
-  // 7 dot markers
+
+  // 7 dots = Mon to Sun of the current ISO week
   const dots=document.getElementById('streakDots');
-  const today=new Date();
+  const ws=weekStart(); // Monday 00:00
+  const todayDs=todayStr();
+
+  // Day labels Mon→Sun (short, PT-BR)
+  const DAY_LABELS=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+
   dots.innerHTML=Array.from({length:7},(_,i)=>{
-    const d=new Date(today); d.setDate(d.getDate()-6+i);
+    const d=new Date(ws);
+    d.setDate(ws.getDate()+i); // Mon+0 … Mon+6=Sun
     const ds=d.toLocaleDateString('pt-BR');
-    const done=hist.find(w=>w.date===ds);
-    const isToday=ds===todayStr();
-    return`<div class="sd${done?' done':''}${isToday&&done?' today':''}"></div>`;
+    const isFuture=d>new Date();
+    const done=!isFuture && hist.find(w=>w.date===ds);
+    const isToday=ds===todayDs;
+    return`<div class="sd${done?' done':''}${isToday?' today':''}${isFuture?' future':''}" title="${DAY_LABELS[i]}"></div>`;
   }).join('');
 }
 
@@ -2163,13 +2292,47 @@ function removeBLE(idx){
   const saved=S.get('rf7_ble',[]); saved.splice(idx,1); S.set('rf7_ble',saved); renderBLE(); showToast('Dispositivo removido');
 }
 async function scanBLE(){
-  if(!navigator.bluetooth){ showToast('Bluetooth não disponível neste browser'); return; }
+  // ── Browser support check ──
+  if(!('bluetooth' in navigator)){
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if(isIOS){
+      showToast('⚠ Bluetooth não suportado no Safari/iOS. Use um app nativo.');
+    } else {
+      showToast('⚠ Web Bluetooth não disponível. Use Chrome no Android ou desktop.');
+    }
+    return;
+  }
+
+  // ── HTTPS requirement ──
+  const isHttps = location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1';
+  if(!isHttps){
+    showToast('⚠ Bluetooth requer HTTPS. Hospede em servidor seguro.');
+    return;
+  }
+
   try{
     showToast('Buscando dispositivos BLE…');
-    const dev=await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:['heart_rate','fitness_machine','battery_service']});
-    const devs=S.get('rf7_ble',[]); if(!devs.find(d=>d.id===dev.id)) devs.push({id:dev.id,name:dev.name||'Dispositivo',type:'HR/Fitness',connected:false}); S.set('rf7_ble',devs);
-    bleDevice=dev; await connectBLEDev(dev); renderBLE();
-  }catch(e){ if(e.name!=='NotFoundError') showToast('Erro BLE: '+e.message); }
+    const dev=await navigator.bluetooth.requestDevice({
+      acceptAllDevices:true,
+      optionalServices:['heart_rate','fitness_machine','battery_service']
+    });
+    const devs=S.get('rf7_ble',[]);
+    if(!devs.find(d=>d.id===dev.id)){
+      devs.push({id:dev.id, name:dev.name||'Dispositivo', type:'HR/Fitness', connected:false});
+    }
+    S.set('rf7_ble',devs);
+    bleDevice=dev;
+    await connectBLEDev(dev);
+    renderBLE();
+  } catch(e){
+    if(e.name==='NotFoundError' || e.name==='NotAllowedError'){
+      // User cancelled the picker — silent
+    } else if(e.name==='SecurityError'){
+      showToast('⚠ Bluetooth bloqueado. Verifique permissões do navegador.');
+    } else {
+      showToast('Erro BLE: '+e.message);
+    }
+  }
 }
 async function connectBLEDev(dev){
   try{
@@ -2187,7 +2350,13 @@ async function connectBLEDev(dev){
       });
       showToast('✓ Heart Rate ativo — '+dev.name);
     }catch(e2){ showToast('Conectado (sem HR): '+dev.name); }
-  }catch(e){ showToast('Falha de conexão: '+e.message); }
+  }catch(e){
+    if(e.name==='NetworkError'){
+      showToast('Falha ao conectar. O dispositivo está próximo e ativo?');
+    } else {
+      showToast('Falha de conexão: '+e.message);
+    }
+  }
 }
 
 /* SETTINGS UI */
@@ -2472,55 +2641,111 @@ function toggleFollow(id,btn){
 }
 
 /* ════════════════════════════════════════
-   PWA INSTALL — beforeinstallprompt + iOS fallback
+   PWA INSTALL — full native prompt flow
+   beforeinstallprompt → saved → .prompt() on click → userChoice
 ════════════════════════════════════════ */
-let _installPrompt=null;
-window.addEventListener('beforeinstallprompt',function(e){
+let _installPrompt = null;
+
+// Capture the event — must preventDefault() to stop mini-infobar on Android
+window.addEventListener('beforeinstallprompt', function(e){
   e.preventDefault();
-  _installPrompt=e;
+  _installPrompt = e;
   updateInstallBanner();
 });
-window.addEventListener('appinstalled',function(){
-  _installPrompt=null;
+
+// Fired when user completes install (Android Chrome)
+window.addEventListener('appinstalled', function(){
+  _installPrompt = null;
   updateInstallBanner(true);
-  showToast('✓ Ranch Fitness instalado!');
+  haptic('success');
+  showToast('✓ Ranch Fitness instalado com sucesso!');
 });
+
+/**
+ * updateInstallBanner — sets correct state class + text on the banner card.
+ * States: installed | ios | ready (native prompt available) | generic
+ */
 function updateInstallBanner(installed){
-  const b=document.getElementById('installBanner');
-  const t=document.getElementById('installTitle');
-  const s=document.getElementById('installSub');
+  const b  = document.getElementById('installBanner');
+  const t  = document.getElementById('installTitle');
+  const s  = document.getElementById('installSub');
   if(!b) return;
-  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
-  const isStandalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
-  if(installed||isStandalone){
+
+  const isIOS        = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  const isHttps      = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+  // Remove all state classes then apply the correct one
+  b.classList.remove('installed','ios','ready');
+
+  if(installed || isStandalone){
     b.classList.add('installed');
-    if(t) t.textContent='Aplicativo instalado ✓';
-    if(s) s.textContent='Ranch Fitness já está na sua tela inicial';
+    if(t) t.textContent = 'Aplicativo instalado ✓';
+    if(s) s.textContent = 'Ranch Fitness já está na sua tela inicial';
+
   } else if(isIOS){
-    if(t) t.textContent='Adicionar à Tela Inicial';
-    if(s) s.textContent='Toque em ⬆ Compartilhar → "Adicionar à Tela Inicial"';
+    b.classList.add('ios');
+    if(t) t.textContent = 'Adicionar à Tela Inicial';
+    if(s) s.textContent = 'No Safari: toque ⬆ Compartilhar → "Adicionar à Tela Inicial"';
+
   } else if(_installPrompt){
-    if(t) t.textContent='Instalar Ranch Fitness';
-    if(s) s.textContent='Toque para adicionar como app nativo';
+    b.classList.add('ready');
+    if(t) t.textContent = 'Instalar Ranch Fitness';
+    if(s) s.textContent = 'Toque para adicionar como app nativo';
+
+  } else if(!isHttps){
+    if(t) t.textContent = 'Instalar Ranch Fitness';
+    if(s) s.textContent = 'Requer HTTPS. Hospede o app em servidor seguro para instalar.';
+
   } else {
-    if(t) t.textContent='Adicionar à Tela Inicial';
-    if(s) s.textContent='Abra no Chrome ou Safari para instalar';
+    if(t) t.textContent = 'Adicionar à Tela Inicial';
+    if(s) s.textContent = 'Abra no Chrome (Android) ou Safari (iOS) para instalar';
   }
 }
+
+/**
+ * triggerInstall — called by banner click.
+ * On Chrome/Android: fires the saved native prompt, awaits userChoice.
+ * On iOS: shows Safari share instructions.
+ * Otherwise: explains requirements.
+ */
 async function triggerInstall(){
   haptic('medium'); SFX.tap();
-  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
-  const isStandalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
-  if(isStandalone){ showToast('App já instalado!'); return; }
-  if(_installPrompt){
-    _installPrompt.prompt();
-    const{outcome}=await _installPrompt.userChoice;
-    if(outcome==='accepted'){ _installPrompt=null; updateInstallBanner(true); }
-  } else if(isIOS){
-    showToast('No Safari: toque ⬆ → "Adicionar à Tela Inicial"');
-  } else {
-    showToast('Abra no Chrome para instalar como app');
+
+  const isIOS        = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+
+  if(isStandalone){
+    showToast('Ranch Fitness já está instalado! ✓');
+    return;
   }
+
+  if(_installPrompt){
+    // Show the native browser install dialog
+    try {
+      _installPrompt.prompt();
+      const { outcome } = await _installPrompt.userChoice;
+      if(outcome === 'accepted'){
+        _installPrompt = null;
+        updateInstallBanner(true);
+        showToast('✓ Instalando Ranch Fitness…');
+      } else {
+        // User dismissed — keep prompt for next time
+        showToast('Instalação cancelada. Tente novamente quando quiser.');
+      }
+    } catch(err){
+      console.warn('Install prompt error:', err);
+      showToast('Erro ao abrir instalação. Tente pelo menu do navegador.');
+    }
+    return;
+  }
+
+  if(isIOS){
+    showToast('No Safari: toque ⬆ Compartilhar → "Adicionar à Tela Inicial"');
+    return;
+  }
+
+  showToast('Abra no Chrome (Android) ou Safari (iOS) para instalar');
 }
 
 /* ════════════════════════════════════════
@@ -2533,53 +2758,57 @@ function buildPWAManifest(){
   cv.width=sz; cv.height=sz;
   const ctx=cv.getContext('2d');
 
-  // ── Matte background — diagonal gradient, no glass ──
+  // ── Matte background — diagonal gradient ──
   const bg=ctx.createLinearGradient(0,0,sz,sz);
-  bg.addColorStop(0,'#0f1030');
-  bg.addColorStop(.45,'#080d20');
+  bg.addColorStop(0,'#0d0f2e');
+  bg.addColorStop(.5,'#080c1e');
   bg.addColorStop(1,'#050810');
   ctx.fillStyle=bg; ctx.fillRect(0,0,sz,sz);
 
-  // Subtle indigo tint in top-left quadrant
-  const tint=ctx.createRadialGradient(sz*.15,sz*.15,0,sz*.15,sz*.15,sz*.7);
-  tint.addColorStop(0,'rgba(99,102,241,.28)'); tint.addColorStop(1,'rgba(99,102,241,0)');
+  // Indigo glow — top-left
+  const tint=ctx.createRadialGradient(sz*.12,sz*.12,0,sz*.12,sz*.12,sz*.68);
+  tint.addColorStop(0,'rgba(99,102,241,.32)'); tint.addColorStop(1,'rgba(99,102,241,0)');
   ctx.fillStyle=tint; ctx.fillRect(0,0,sz,sz);
 
-  // Subtle cyan tint in bottom-right
-  const tint2=ctx.createRadialGradient(sz*.88,sz*.88,0,sz*.88,sz*.88,sz*.55);
-  tint2.addColorStop(0,'rgba(6,182,212,.2)'); tint2.addColorStop(1,'rgba(6,182,212,0)');
+  // Cyan glow — bottom-right
+  const tint2=ctx.createRadialGradient(sz*.88,sz*.9,0,sz*.88,sz*.9,sz*.5);
+  tint2.addColorStop(0,'rgba(6,182,212,.22)'); tint2.addColorStop(1,'rgba(6,182,212,0)');
   ctx.fillStyle=tint2; ctx.fillRect(0,0,sz,sz);
 
-  // ── "RF" initials — large, centered, gradient ──
+  // ── "RF" — together, centered, bold, indigo→cyan gradient ──
   ctx.save();
   ctx.textAlign='center';
   ctx.textBaseline='middle';
 
-  // Gradient for letters
-  const lg=ctx.createLinearGradient(sz*.2,sz*.2,sz*.8,sz*.8);
-  lg.addColorStop(0,'#818cf8');
-  lg.addColorStop(.5,'#6366f1');
-  lg.addColorStop(1,'#06b6d4');
+  // Tight letter-spacing: draw as a single string for natural kerning
+  const fontSize=Math.round(sz*.52);
+  ctx.font=`900 ${fontSize}px 'Arial Black',Impact,sans-serif`;
 
-  // R — left of center
-  ctx.font='900 '+Math.round(sz*.48)+'px Arial Black,Impact,sans-serif';
+  // Gradient for the text
+  const lg=ctx.createLinearGradient(sz*.15,sz*.2,sz*.85,sz*.8);
+  lg.addColorStop(0,'#a5b4fc');  // light indigo
+  lg.addColorStop(.45,'#6366f1'); // indigo
+  lg.addColorStop(1,'#06b6d4');  // cyan
   ctx.fillStyle=lg;
-  ctx.fillText('R',sz*.32,sz*.46);
 
-  // F — right of center, slightly lower opacity to create visual balance
-  ctx.fillStyle=lg;
-  ctx.globalAlpha=0.78;
-  ctx.fillText('F',sz*.68,sz*.54);
-  ctx.globalAlpha=1;
+  // Subtle drop shadow for depth
+  ctx.shadowColor='rgba(99,102,241,.55)';
+  ctx.shadowBlur=sz*.06;
+  ctx.shadowOffsetX=0;
+  ctx.shadowOffsetY=sz*.02;
 
-  // ── Thin brand line under letters ──
-  const lineG=ctx.createLinearGradient(sz*.2,0,sz*.8,0);
+  // Draw "RF" as one unit, centered slightly above midpoint
+  ctx.fillText('RF', sz*.5, sz*.48);
+  ctx.shadowBlur=0;
+
+  // ── Thin brand line below ──
+  const lineG=ctx.createLinearGradient(sz*.25,0,sz*.75,0);
   lineG.addColorStop(0,'rgba(99,102,241,0)');
-  lineG.addColorStop(.4,'rgba(99,102,241,.7)');
-  lineG.addColorStop(.6,'rgba(6,182,212,.7)');
+  lineG.addColorStop(.35,'rgba(99,102,241,.65)');
+  lineG.addColorStop(.65,'rgba(6,182,212,.65)');
   lineG.addColorStop(1,'rgba(6,182,212,0)');
-  ctx.strokeStyle=lineG; ctx.lineWidth=sz*.006;
-  ctx.beginPath(); ctx.moveTo(sz*.2,sz*.72); ctx.lineTo(sz*.8,sz*.72); ctx.stroke();
+  ctx.strokeStyle=lineG; ctx.lineWidth=sz*.005;
+  ctx.beginPath(); ctx.moveTo(sz*.25,sz*.74); ctx.lineTo(sz*.75,sz*.74); ctx.stroke();
 
   ctx.restore();
 
